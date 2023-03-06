@@ -2,6 +2,7 @@ package com.collinbugash.swipeify
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.TextView
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
@@ -21,9 +22,15 @@ import com.collinbugash.swipeify.presentation.viewmodel.SwipeifyViewModel
 import com.collinbugash.swipeify.presentation.viewmodel.SwipeifyViewModelFactory
 import com.collinbugash.swipeify.ui.theme.SwipeifyTheme
 import androidx.navigation.compose.rememberNavController
+import com.android.volley.Request
+import com.android.volley.Response
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
 import com.collinbugash.swipeify.presentation.navigation.SwipeifyBottomBar
 import com.collinbugash.swipeify.presentation.navigation.SwipeifyNavHost
 import com.collinbugash.swipeify.ui.theme.DarkBlack1
+import org.json.JSONObject
+
 
 class MainActivity : ComponentActivity() {
     companion object{
