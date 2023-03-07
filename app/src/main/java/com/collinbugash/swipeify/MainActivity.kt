@@ -13,6 +13,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
@@ -22,10 +23,7 @@ import com.collinbugash.swipeify.presentation.viewmodel.SwipeifyViewModel
 import com.collinbugash.swipeify.presentation.viewmodel.SwipeifyViewModelFactory
 import com.collinbugash.swipeify.ui.theme.SwipeifyTheme
 import androidx.navigation.compose.rememberNavController
-import com.android.volley.Request
-import com.android.volley.Response
-import com.android.volley.toolbox.StringRequest
-import com.android.volley.toolbox.Volley
+import com.collinbugash.swipeify.api.TrackFetcher
 import com.collinbugash.swipeify.presentation.navigation.SwipeifyBottomBar
 import com.collinbugash.swipeify.presentation.navigation.SwipeifyNavHost
 import com.collinbugash.swipeify.ui.theme.DarkBlack1
@@ -59,6 +57,7 @@ class MainActivity : ComponentActivity() {
 private fun MainActivityContent(swipeifyViewModel: SwipeifyViewModel){
     val navController = rememberNavController()
     val context = LocalContext.current
+
 
     SwipeifyTheme {
         // A surface container using the 'background' color from the theme
