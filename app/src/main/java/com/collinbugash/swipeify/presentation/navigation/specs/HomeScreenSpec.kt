@@ -14,6 +14,6 @@ object HomeScreenSpec : IScreenSpec {
                          navController: NavController
     ){
         println("HOME CALLED")
-        HomeScreen()
+        HomeScreen(onLyricButtonClicked = { navController.navigate("lyric")})
     }
 }

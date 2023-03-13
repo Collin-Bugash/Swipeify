@@ -2,14 +2,30 @@ package com.collinbugash.swipeify.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-val Purple80 = Color(0xFFD0BCFF)
-val PurpleGrey80 = Color(0xFFCCC2DC)
-val Pink80 = Color(0xFFEFB8C8)
 
-val Purple40 = Color(0xFF6650a4)
-val PurpleGrey40 = Color(0xFF625b71)
-val Pink40 = Color(0xFF7D5260)
+//Primary Colors
+val PrimaryLightGreen300 = Color(0xFF65D46E)
+val PrimaryLightGreen600 = Color(0xFF00ae21)
+val PrimaryLightGreen900 = Color(0xFF006b00)
+val PrimaryLightGreen50 = Color(0xFFe5f8e6)
 
-val LightGreen1 = Color(red = 101, green = 212, blue = 110)
-val DarkBlack1 = Color(red = 19, green = 19, blue = 19)
-val DarkBlack2 = Color(red = 30, green = 30, blue = 30)
+//Secondary Colors
+val SecondaryDirtyGreen500 = Color(0xFF849680)
+val SecondaryDirtyGreen200 = Color(0xFFd8ecd4)
+
+//Tertiary Colors
+val TertiaryLightPurple400 = Color(0xFFd500f9)
+val TertiaryLightPurple600 = Color(0xFFb600f1)
+val TertiaryLightPurple50 = Color(0xFFfae5fe)
+val TertiaryLightPurple200 = Color(0xFFe88dfb)
+
+//Background Colors and Surface Colors
+val BackgroundBlack800 = Color(0xFF1E1E1E)
+val BackgroundBlack900 = Color(0xFF000000)
+val BackgroundBlack600 = Color(0xFF555555)
+val BackgroundBlack300 = Color(0xFFc4c4c4)
+
+val BackgroundWhite0 = Color(0xFFFFFFFF)
+
+
+

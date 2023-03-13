@@ -16,16 +16,38 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.ViewCompat
 
+//USING THIS ONE AT THE MOMENT
 private val DarkColorScheme = darkColorScheme(
-    primary = DarkBlack1,
-    secondary = LightGreen1,
-    tertiary = Color.White,
+    primary = PrimaryLightGreen300,
+    onPrimary = BackgroundBlack800,
+    primaryContainer = PrimaryLightGreen600,
+    onPrimaryContainer = PrimaryLightGreen50,
+
+    secondary = SecondaryDirtyGreen500,
+    onSecondary = BackgroundBlack800,
+    secondaryContainer = SecondaryDirtyGreen500,
+    onSecondaryContainer = SecondaryDirtyGreen200,
+
+    tertiary = TertiaryLightPurple400,
+    onTertiary = BackgroundBlack800,
+    tertiaryContainer = TertiaryLightPurple400,
+    onTertiaryContainer = TertiaryLightPurple50,
+
+    background = BackgroundBlack900,
+    onBackground = Color.White,
+    surface = BackgroundBlack800,
+    onSurface = BackgroundBlack300,
+
+    outline = BackgroundBlack300
+
 )
 
 private val LightColorScheme = lightColorScheme(
-    primary = DarkBlack1,
-    secondary = LightGreen1,
+    primary = PrimaryLightGreen600,
+    secondary = SecondaryDirtyGreen500,
     tertiary = Color.White,
+    background = Color.Black,
+    onBackground = Color.Black
 
 )
 
@@ -36,6 +58,7 @@ fun SwipeifyTheme(
     dynamicColor: Boolean = true,
     content: @Composable () -> Unit
 ) {
+    println(darkTheme)
     val colorScheme = when {
         dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
             val context = LocalContext.current
@@ -52,8 +75,10 @@ fun SwipeifyTheme(
         }
     }
 
+
     MaterialTheme(
-        colorScheme = colorScheme,
+        //TODO: CURRENTLY HARD CODED TO DARK THEME instead of colorScheme = colorScheme
+        colorScheme = DarkColorScheme,
         typography = Typography,
         content = content
     )

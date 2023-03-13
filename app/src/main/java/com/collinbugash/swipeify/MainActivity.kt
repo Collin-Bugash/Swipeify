@@ -2,32 +2,23 @@ package com.collinbugash.swipeify
 
 import android.os.Bundle
 import android.util.Log
-import android.widget.TextView
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.core.content.PackageManagerCompat.LOG_TAG
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.compose.rememberNavController
+import com.collinbugash.swipeify.presentation.navigation.SwipeifyBottomBar
+import com.collinbugash.swipeify.presentation.navigation.SwipeifyNavHost
 import com.collinbugash.swipeify.presentation.viewmodel.SwipeifyViewModel
 import com.collinbugash.swipeify.presentation.viewmodel.SwipeifyViewModelFactory
 import com.collinbugash.swipeify.ui.theme.SwipeifyTheme
-import androidx.navigation.compose.rememberNavController
-import com.collinbugash.swipeify.api.TrackFetcher
-import com.collinbugash.swipeify.presentation.navigation.SwipeifyBottomBar
-import com.collinbugash.swipeify.presentation.navigation.SwipeifyNavHost
-import com.collinbugash.swipeify.ui.theme.DarkBlack1
-import org.json.JSONObject
 
 
 class MainActivity : ComponentActivity() {

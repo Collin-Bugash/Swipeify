@@ -5,5 +5,5 @@ import androidx.compose.runtime.Composable
 
 @Composable
 fun LyricsScreen(){
-    Text(text = "LYRICS")
+    Text(text = "LYRICS SCREEN")
 }
