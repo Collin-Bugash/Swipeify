@@ -28,9 +28,9 @@ private val DarkColorScheme = darkColorScheme(
     secondaryContainer = SecondaryDirtyGreen500,
     onSecondaryContainer = SecondaryDirtyGreen200,
 
-    tertiary = TertiaryLightPurple400,
+    tertiary = TertiaryLightPurple600,
     onTertiary = BackgroundBlack800,
-    tertiaryContainer = TertiaryLightPurple400,
+    tertiaryContainer = TertiaryLightPurple600,
     onTertiaryContainer = TertiaryLightPurple50,
 
     background = BackgroundBlack900,

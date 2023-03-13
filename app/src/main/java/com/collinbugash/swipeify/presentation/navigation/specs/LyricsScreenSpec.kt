@@ -18,6 +18,6 @@ object LyricsScreenSpec : IScreenSpec{
     override fun Content(swipeifyViewModel : SwipeifyViewModel,
                          navController: NavController
     ){
-        LyricsScreen()
+        LyricsScreen(backButtonPressed = { navController.navigate("home") })
     }
 }

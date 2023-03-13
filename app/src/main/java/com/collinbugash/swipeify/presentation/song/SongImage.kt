@@ -29,7 +29,7 @@ import com.collinbugash.swipeify.R
 @Composable
 fun SongImage(onLyricButtonClicked:() -> Unit){
     val borderWidth = 4.dp
-    val padding = 25.dp
+    val padding = 10.dp
     val screenWidth = LocalConfiguration.current.screenWidthDp.dp
 
     Box(modifier = Modifier.padding(padding).width(screenWidth - padding - padding).height(screenWidth - padding - padding), contentAlignment = Alignment.BottomStart){

@@ -39,7 +39,7 @@ fun SongButtons(){
         IconButton(
             onClick = { /*TODO*/ },
             modifier = Modifier
-                .size(50.dp)
+                .size(40.dp)
                 .border(
                     BorderStroke(borderWidth, Color.White),
                     CircleShape
@@ -73,7 +73,7 @@ fun SongButtons(){
                 }
             },
             modifier = Modifier
-                .size(50.dp)
+                .size(40.dp)
                 .border(
                     BorderStroke(borderWidth, Color.White),
                     CircleShape
@@ -90,7 +90,7 @@ fun SongButtons(){
         IconButton(
             onClick = { /*TODO*/ },
             modifier = Modifier
-                .size(50.dp)
+                .size(40.dp)
                 .border(
                     BorderStroke(borderWidth, Color.White),
                     CircleShape

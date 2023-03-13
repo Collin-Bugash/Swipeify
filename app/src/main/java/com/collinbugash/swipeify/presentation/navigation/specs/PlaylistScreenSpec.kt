@@ -6,6 +6,7 @@ import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
+import com.collinbugash.swipeify.data.SongRepo
 import com.collinbugash.swipeify.presentation.home.HomeScreen
 import com.collinbugash.swipeify.presentation.playlist.PlaylistScreen
 import com.collinbugash.swipeify.presentation.viewmodel.SwipeifyViewModel
@@ -19,6 +20,6 @@ object PlaylistScreenSpec : IScreenSpec {
     override fun Content(swipeifyViewModel : SwipeifyViewModel,
                          navController: NavController
     ){
-        PlaylistScreen()
+        PlaylistScreen(SongRepo.songs)
     }
 }

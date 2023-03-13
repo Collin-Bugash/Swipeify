@@ -2,11 +2,14 @@ package com.collinbugash.swipeify.presentation.navigation.specs
 
 import android.content.Context
 import android.util.Log
+import androidx.compose.foundation.layout.height
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
@@ -46,6 +49,7 @@ sealed interface IScreenSpec {
     @Composable
     private fun BottomAppBarContent(swipeifyViewModel: SwipeifyViewModel, navController: NavHostController, navBackStackEntry: NavBackStackEntry?, context: Context){
         BottomAppBar(
+            modifier = Modifier.height(80.dp),
             actions = {
                 NavigationBarRepo.bottomNavItems.forEach{
                     item -> val selected = item.route == navController.currentBackStackEntryAsState().value?.destination?.route
