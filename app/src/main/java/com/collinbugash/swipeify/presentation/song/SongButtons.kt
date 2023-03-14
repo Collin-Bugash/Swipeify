@@ -3,6 +3,7 @@ package com.collinbugash.swipeify.presentation.song
 import android.media.AudioAttributes
 import android.media.MediaPlayer
 import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
@@ -22,6 +23,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.collinbugash.swipeify.api.TrackFetcher
 
@@ -29,7 +31,7 @@ import com.collinbugash.swipeify.api.TrackFetcher
 @Composable
 fun SongButtons(){
     val borderWidth = 3.dp
-
+    val context = LocalContext.current;
     // test song
     val trackFetcher = TrackFetcher()
     val trackState = trackFetcher.trackState.collectAsState()
@@ -37,7 +39,7 @@ fun SongButtons(){
 
     Row(modifier = Modifier.padding(vertical = 20.dp).fillMaxWidth(0.75f).fillMaxSize(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.Bottom) {
         IconButton(
-            onClick = { /*TODO*/ },
+            onClick = { Toast.makeText(context, "User disliked song", Toast.LENGTH_SHORT).show() },
             modifier = Modifier
                 .size(40.dp)
                 .border(
@@ -57,6 +59,7 @@ fun SongButtons(){
         IconButton(
             onClick =
             {
+                 Toast.makeText(context, "User played song", Toast.LENGTH_SHORT).show()
                 // test song
                 val url = trackState.value?.preview ?: "URL IS NULL" // your URL here
                 Log.d("API", url)
@@ -88,7 +91,7 @@ fun SongButtons(){
         }
 
         IconButton(
-            onClick = { /*TODO*/ },
+            onClick = { Toast.makeText(context, "User liked song", Toast.LENGTH_SHORT).show() },
             modifier = Modifier
                 .size(40.dp)
                 .border(
