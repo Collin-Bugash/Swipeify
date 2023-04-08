@@ -32,12 +32,16 @@ import com.collinbugash.swipeify.api.TrackFetcher
 fun SongButtons(){
     val borderWidth = 3.dp
     val context = LocalContext.current;
+
     // test song
     val trackFetcher = TrackFetcher()
     val trackState = trackFetcher.trackState.collectAsState()
-    trackFetcher.getTrack("3135556")
+    trackFetcher.getTrack("916424")
 
-    Row(modifier = Modifier.padding(vertical = 20.dp).fillMaxWidth(0.75f).fillMaxSize(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.Bottom) {
+    Row(modifier = Modifier
+        .padding(vertical = 20.dp)
+        .fillMaxWidth(0.75f)
+        .fillMaxSize(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.Bottom) {
         IconButton(
             onClick = { Toast.makeText(context, "User disliked song", Toast.LENGTH_SHORT).show() },
             modifier = Modifier
