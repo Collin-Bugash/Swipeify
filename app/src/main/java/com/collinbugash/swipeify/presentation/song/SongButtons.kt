@@ -35,9 +35,9 @@ fun SongButtons(){
 
     // test song
     // TODO remove once logic is refactored out
-    val trackFetcher = TrackFetcher()
-    val trackState = trackFetcher.trackState.collectAsState()
-    trackFetcher.getTrack("916424")
+//    val trackFetcher = TrackFetcher()
+//    val trackState = trackFetcher.trackState.collectAsState()
+//    trackFetcher.getTrack("916424")
 
     Row(modifier = Modifier
         .padding(vertical = 20.dp)
@@ -64,22 +64,22 @@ fun SongButtons(){
         IconButton(
             onClick =
             {
-                // TODO refactor this out (to viewmodel?)
-                 Toast.makeText(context, "User played song", Toast.LENGTH_SHORT).show()
-                // test song
-                val url = trackState.value?.preview ?: "URL IS NULL" // your URL here
-                Log.d("API", url)
-                val mediaPlayer = MediaPlayer().apply {
-                    setAudioAttributes(
-                        AudioAttributes.Builder()
-                            .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
-                            .setUsage(AudioAttributes.USAGE_MEDIA)
-                            .build()
-                    )
-                    setDataSource(url)
-                    prepare() // might take long! (for buffering, etc)
-                    start()
-                }
+//                // TODO refactor this out (to viewmodel?)
+//                 Toast.makeText(context, "User played song", Toast.LENGTH_SHORT).show()
+//                // test song
+//                val url = trackState.value?.preview ?: "URL IS NULL" // your URL here
+//                Log.d("API", url)
+//                val mediaPlayer = MediaPlayer().apply {
+//                    setAudioAttributes(
+//                        AudioAttributes.Builder()
+//                            .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+//                            .setUsage(AudioAttributes.USAGE_MEDIA)
+//                            .build()
+//                    )
+//                    setDataSource(url)
+//                    prepare() // might take long! (for buffering, etc)
+//                    start()
+//                }
             },
             modifier = Modifier
                 .size(40.dp)

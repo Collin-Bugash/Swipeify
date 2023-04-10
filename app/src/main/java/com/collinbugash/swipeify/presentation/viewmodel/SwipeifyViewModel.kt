@@ -3,7 +3,7 @@ package com.collinbugash.swipeify.presentation.viewmodel
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.collinbugash.swipeify.data.SwipeifyRepo
-import com.collinbugash.swipeify.data.types.Track
+import com.collinbugash.swipeify.data.db.Track
 
 class SwipeifyViewModel(private val swipeifyRepo: SwipeifyRepo) : ViewModel() {
     companion object {

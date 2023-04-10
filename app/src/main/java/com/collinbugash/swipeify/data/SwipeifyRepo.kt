@@ -5,7 +5,7 @@ import android.util.Log
 import com.collinbugash.swipeify.api.TrackFetcher
 import com.collinbugash.swipeify.data.database.SwipeifyDao
 import com.collinbugash.swipeify.data.database.SwipeifyDatabase
-import com.collinbugash.swipeify.data.types.Track
+import com.collinbugash.swipeify.data.db.Track
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.Flow
@@ -48,15 +48,17 @@ private constructor(private val swipeifyDao: SwipeifyDao, private val coroutineS
     // playlist id's that hold songs for each genre
     // TODO add more genres later
     private val playlists = listOf(
-        Pair("10858936162", "pop"),
-        Pair("10475361602", "piano")
+        Pair("37i9dQZF1DX4sWSpwq3LiO?si=956da7b0331a4ef7", "piano")
     )
     // loops over the playlist id's and adds all the songs from them into db
-   suspend fun addPlaylists() {
-        for (playlist in playlists) {
-            val trackFetcher = TrackFetcher()
-            trackFetcher.getPlaylist(playlist.first, playlist.second, this)
-        }
+    fun addPlaylists() {
+        Log.d("ADD PAYLISTS CALLED", "HERE")
+//        for (playlist in playlists) {
+//            val trackFetcher = TrackFetcher()
+//            trackFetcher.getPlaylistTracks(playlist.first, playlist.second, this)
+//        }
+        val trackFetcher = TrackFetcher()
+        trackFetcher.getPlaylistTracks("37i9dQZF1DX4sWSpwq3LiO?si=956da7b0331a4ef7", "piano", this)
     }
 
     init {

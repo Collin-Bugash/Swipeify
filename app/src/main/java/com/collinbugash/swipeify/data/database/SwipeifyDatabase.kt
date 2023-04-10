@@ -5,10 +5,10 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.collinbugash.swipeify.data.types.Track
+import com.collinbugash.swipeify.data.db.Track
 
 @Database(entities = [Track::class], version = 3)
-@TypeConverters(SwipeifyTypeConverter::class)
+@TypeConverters(ArtistListTypeConverter::class, ImageListTypeConverter::class)
 abstract class SwipeifyDatabase : RoomDatabase() {
     companion object {
         @Volatile private var INSTANCE: SwipeifyDatabase? = null

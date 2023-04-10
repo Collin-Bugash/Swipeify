@@ -1,4 +1,4 @@
-package com.collinbugash.swipeify.data.types
+package com.collinbugash.swipeify.data.db
 
 data class Artist(
     val id: String,
