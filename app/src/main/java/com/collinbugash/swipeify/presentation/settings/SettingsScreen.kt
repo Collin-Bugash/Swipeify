@@ -45,6 +45,13 @@ fun SettingsScreen(){
                 Text(text = "Select Genres")
                 ResetButton(onClick =  { Toast.makeText(context, "Settings Reset", Toast.LENGTH_SHORT).show() })
             }
+            Row(modifier = Modifier
+                .fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceEvenly,
+                verticalAlignment = Alignment.CenterVertically)
+            {
+
+            }
         }
     }
 }
