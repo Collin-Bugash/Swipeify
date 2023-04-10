@@ -10,9 +10,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.collinbugash.swipeify.R
 import org.intellij.lang.annotations.JdkConstants.HorizontalAlignment
 
 @Composable
@@ -50,7 +52,8 @@ fun SettingsScreen(){
                 horizontalArrangement = Arrangement.SpaceEvenly,
                 verticalAlignment = Alignment.CenterVertically)
             {
-
+                GenreButton(onClick = { /*TODO*/ }, genreName = stringResource(id = R.string.piano_genre))
+                GenreButton(onClick = {/*TODO*/}, genreName = stringResource(id = R.string.pop_genre))
             }
         }
     }
