@@ -11,8 +11,8 @@ import retrofit2.http.Query
 interface SwipeifyService {
     @GET("playlist_tracks/")
     fun getPlaylistTracks(@Query("id") playlistId: String): Call<PlaylistTracks>
-    @GET("track_lyrics/{trackId}")
-    fun getTrackLyrics(@Path("trackId") trackId: String): Call<Lyrics>
+    @GET("track_lyrics/")
+    fun getTrackLyrics(@Query("id") trackId: String): Call<Lyrics>
 }
 
 

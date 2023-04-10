@@ -48,17 +48,15 @@ private constructor(private val swipeifyDao: SwipeifyDao, private val coroutineS
     // playlist id's that hold songs for each genre
     // TODO add more genres later
     private val playlists = listOf(
-        Pair("37i9dQZF1DX4sWSpwq3LiO?si=956da7b0331a4ef7", "piano")
+        Pair("37i9dQZF1DX4sWSpwq3LiO?si=956da7b0331a4ef7", "piano"),
+        Pair("2UZk7JjJnbTut1w8fqs3JL?si=52b08f117aa44e5f", "pop")
     )
     // loops over the playlist id's and adds all the songs from them into db
     fun addPlaylists() {
-        Log.d("ADD PAYLISTS CALLED", "HERE")
-//        for (playlist in playlists) {
-//            val trackFetcher = TrackFetcher()
-//            trackFetcher.getPlaylistTracks(playlist.first, playlist.second, this)
-//        }
         val trackFetcher = TrackFetcher()
-        trackFetcher.getPlaylistTracks("37i9dQZF1DX4sWSpwq3LiO?si=956da7b0331a4ef7", "piano", this)
+        for (playlist in playlists) {
+            trackFetcher.getPlaylistTracks(playlist.first, playlist.second, this)
+        }
     }
 
     init {
