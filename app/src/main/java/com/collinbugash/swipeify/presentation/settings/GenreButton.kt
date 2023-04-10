@@ -11,14 +11,14 @@ import androidx.compose.ui.unit.dp
 import com.collinbugash.swipeify.R
 
 @Composable
-fun GenreButton(onClick: () -> Unit, ) {
+fun GenreButton(onClick: () -> Unit, genreName: String) {
     Button(
         modifier = Modifier
             .width(130.dp),
         onClick = onClick,
     ) {
         Text(
-            text = stringResource(id = R.string.reset),
+            text = genreName,
             textAlign = TextAlign.Center
         )
     }
