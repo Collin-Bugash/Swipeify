@@ -64,8 +64,8 @@ fun SongButtons(){
         IconButton(
             onClick =
             {
-//                // TODO refactor this out (to viewmodel?)
-//                 Toast.makeText(context, "User played song", Toast.LENGTH_SHORT).show()
+                  // TODO refactor mediaplayer out (to viewmodel?)
+                 Toast.makeText(context, "User played song", Toast.LENGTH_SHORT).show()
 //                // test song
 //                val url = trackState.value?.preview ?: "URL IS NULL" // your URL here
 //                Log.d("API", url)

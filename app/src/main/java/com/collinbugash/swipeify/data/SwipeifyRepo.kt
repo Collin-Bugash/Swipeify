@@ -61,10 +61,7 @@ private constructor(private val swipeifyDao: SwipeifyDao, private val coroutineS
 
     init {
         Log.d(LOG_TAG, "initializing repo list")
-        // TODO i think this is being called everytime app is opened, also don't know if this is the right place to add them
-        coroutineScope.launch {
-            addPlaylists()
-        }
+
         val trackList = mutableListOf<Track>()
         tracks = trackList.toList()
     }

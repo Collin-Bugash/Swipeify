@@ -82,7 +82,7 @@ class TrackFetcher {
                         for (item in playlistTracks.tracks.items) {
                             item.track.genre = genre
                             swipeifyRepo.addTrack(item.track)
-                            Log.d("API: CURRENT TRACK", item.track.toString())
+                            Log.d("API: CURRENT TRACK", item.track.preview_url)
                         }
                         Log.d("API", "FINISHED ADDING")
                 }

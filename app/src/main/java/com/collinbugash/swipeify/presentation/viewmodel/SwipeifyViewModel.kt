@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.collinbugash.swipeify.data.SwipeifyRepo
 import com.collinbugash.swipeify.data.db.Track
+import kotlinx.coroutines.flow.Flow
 
 class SwipeifyViewModel(private val swipeifyRepo: SwipeifyRepo) : ViewModel() {
     companion object {
@@ -18,6 +19,8 @@ class SwipeifyViewModel(private val swipeifyRepo: SwipeifyRepo) : ViewModel() {
         Log.d(LOG_TAG, "adding playlists songs to db")
         swipeifyRepo.addPlaylists()
     }
+
+    fun getTracksByGenre(genre: String): Flow<List<Track>> = swipeifyRepo.getTracksByGenre(genre)
 
     init {
         Log.d(LOG_TAG, "View Model Created")
