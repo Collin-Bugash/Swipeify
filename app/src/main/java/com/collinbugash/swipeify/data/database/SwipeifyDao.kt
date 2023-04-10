@@ -1,7 +1,7 @@
 package com.collinbugash.swipeify.data.database
 
 import androidx.room.*
-import com.collinbugash.swipeify.data.Track
+import com.collinbugash.swipeify.data.types.Track
 import kotlinx.coroutines.flow.Flow
 
 @Dao

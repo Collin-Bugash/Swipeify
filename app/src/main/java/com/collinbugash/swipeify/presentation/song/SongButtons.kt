@@ -34,6 +34,7 @@ fun SongButtons(){
     val context = LocalContext.current;
 
     // test song
+    // TODO remove once logic is refactored out
     val trackFetcher = TrackFetcher()
     val trackState = trackFetcher.trackState.collectAsState()
     trackFetcher.getTrack("916424")
@@ -63,6 +64,7 @@ fun SongButtons(){
         IconButton(
             onClick =
             {
+                // TODO refactor this out (to viewmodel?)
                  Toast.makeText(context, "User played song", Toast.LENGTH_SHORT).show()
                 // test song
                 val url = trackState.value?.preview ?: "URL IS NULL" // your URL here

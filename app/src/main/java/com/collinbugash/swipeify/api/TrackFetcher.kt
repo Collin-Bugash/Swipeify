@@ -1,9 +1,9 @@
 package com.collinbugash.swipeify.api
 
 import android.util.Log
-import com.collinbugash.swipeify.data.Playlist
-import com.collinbugash.swipeify.data.Track
-import com.google.gson.Gson
+import com.collinbugash.swipeify.data.SwipeifyRepo
+import com.collinbugash.swipeify.data.types.Playlist
+import com.collinbugash.swipeify.data.types.Track
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -50,7 +50,7 @@ class TrackFetcher {
     }
 
     // Function to make an API call for a playlist
-    suspend fun getPlaylist(playlistId: String) {
+    suspend fun getPlaylist(playlistId: String, genre: String, swipeifyRepo: SwipeifyRepo) {
         val swipeifyRequest = swipeifyService.getPlaylist(playlistId)
         swipeifyRequest.enqueue(object: Callback<Playlist> {
             override fun onFailure(call: Call<Playlist>, t: Throwable) {
@@ -62,6 +62,12 @@ class TrackFetcher {
                 swipeifyResponse?.let { playlist ->
                     mPlaylistState.update { playlist }
                     Log.d("API", "Response (Playlist): $swipeifyResponse")
+                        for (track in playlist.tracks.data) {
+                            track.genre = genre
+                            swipeifyRepo.addTrack(track)
+                            Log.d("API: CURRENT TRACK", track.toString())
+                        }
+                        Log.d("API", "FINISHED ADDING")
                 }
             }
         })

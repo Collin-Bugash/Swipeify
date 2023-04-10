@@ -1,10 +1,8 @@
-package com.collinbugash.swipeify.data
+package com.collinbugash.swipeify.data.types
 
+import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import org.json.JSONObject
-import retrofit2.http.Url
-import java.util.Date
 
 @Entity(tableName = "track")
 data class Track(
@@ -12,7 +10,10 @@ data class Track(
     val id: Int,
     val readable: Boolean,
     val title: String,
-//    val isrc: String,
     val preview: String,
-    var genre: String = ""
+    var genre: String = "",
+    @Embedded(prefix = "album_")
+    val album: Album,
+    @Embedded(prefix = "artist_")
+    val artist: Artist
 )

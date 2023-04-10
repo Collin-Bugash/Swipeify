@@ -2,8 +2,10 @@ package com.collinbugash.swipeify.data
 
 import android.content.Context
 import android.util.Log
+import com.collinbugash.swipeify.api.TrackFetcher
 import com.collinbugash.swipeify.data.database.SwipeifyDao
 import com.collinbugash.swipeify.data.database.SwipeifyDatabase
+import com.collinbugash.swipeify.data.types.Track
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.Flow
@@ -42,8 +44,27 @@ private constructor(private val swipeifyDao: SwipeifyDao, private val coroutineS
         }
     }
 
+
+    // playlist id's that hold songs for each genre
+    // TODO add more genres later
+    private val playlists = listOf(
+        Pair("10858936162", "pop"),
+        Pair("10475361602", "piano")
+    )
+    // loops over the playlist id's and adds all the songs from them into db
+   suspend fun addPlaylists() {
+        for (playlist in playlists) {
+            val trackFetcher = TrackFetcher()
+            trackFetcher.getPlaylist(playlist.first, playlist.second, this)
+        }
+    }
+
     init {
         Log.d(LOG_TAG, "initializing repo list")
+        // TODO i think this is being called everytime app is opened, also don't know if this is the right place to add them
+        coroutineScope.launch {
+            addPlaylists()
+        }
         val trackList = mutableListOf<Track>()
         tracks = trackList.toList()
     }

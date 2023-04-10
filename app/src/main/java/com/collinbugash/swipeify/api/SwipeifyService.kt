@@ -1,7 +1,7 @@
 package com.collinbugash.swipeify.api
 
-import com.collinbugash.swipeify.data.Playlist
-import com.collinbugash.swipeify.data.Track
+import com.collinbugash.swipeify.data.types.Playlist
+import com.collinbugash.swipeify.data.types.Track
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path

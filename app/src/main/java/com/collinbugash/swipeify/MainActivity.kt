@@ -10,19 +10,15 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.compose.rememberNavController
-import com.collinbugash.swipeify.api.TrackFetcher
-import com.collinbugash.swipeify.data.Track
 import com.collinbugash.swipeify.presentation.navigation.SwipeifyBottomBar
 import com.collinbugash.swipeify.presentation.navigation.SwipeifyNavHost
 import com.collinbugash.swipeify.presentation.viewmodel.SwipeifyViewModel
 import com.collinbugash.swipeify.presentation.viewmodel.SwipeifyViewModelFactory
 import com.collinbugash.swipeify.ui.theme.SwipeifyTheme
-import com.google.gson.Gson
 
 
 class MainActivity : ComponentActivity() {
