@@ -15,6 +15,12 @@ class SwipeifyViewModel(private val swipeifyRepo: SwipeifyRepo) : ViewModel() {
         private const val LOG_TAG = "448.SwipeifyViewModel"
     }
 
+    //Variable to hold current song
+    private val mCurrentSong: MutableStateFlow<Track?> = MutableStateFlow(null)
+    val currentSong: Track?
+        get() = mCurrentSong.asStateFlow().value
+
+
     //Variable flags for each genre
     //For piano genre
     private val mPianoGenre: MutableStateFlow<Boolean> = MutableStateFlow(false)
@@ -37,6 +43,10 @@ class SwipeifyViewModel(private val swipeifyRepo: SwipeifyRepo) : ViewModel() {
     //List of pop songs
     private val mPopSongs: MutableStateFlow<List<Track>> = MutableStateFlow(emptyList())
 
+
+
+    //List of liked songs
+    private val mLikedSongs: MutableStateFlow<List<Track>> = MutableStateFlow(emptyList())
 
 
     fun addTrack(trackToAdd: Track) {
