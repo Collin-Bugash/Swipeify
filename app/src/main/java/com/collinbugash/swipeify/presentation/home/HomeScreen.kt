@@ -17,10 +17,11 @@ import com.collinbugash.swipeify.presentation.song.SongButtons
 import com.collinbugash.swipeify.presentation.song.SongImage
 import com.collinbugash.swipeify.presentation.song.SongInformation
 import com.collinbugash.swipeify.presentation.song.SongLiked
+import com.collinbugash.swipeify.presentation.viewmodel.SwipeifyViewModel
 import kotlinx.coroutines.selects.select
 
 @Composable
-fun HomeScreen(onLyricButtonClicked:() -> Unit){
+fun HomeScreen(onLyricButtonClicked:() -> Unit, viewModel: SwipeifyViewModel){
     Card(
         colors = CardDefaults.cardColors(
             containerColor =
@@ -44,7 +45,7 @@ fun HomeScreen(onLyricButtonClicked:() -> Unit){
 
 
 
-            SongButtons()
+            SongButtons(viewModel = viewModel)
         }
     }
 
@@ -54,5 +55,6 @@ fun HomeScreen(onLyricButtonClicked:() -> Unit){
 @Composable
 @Preview
 fun HomeScreenPreview() {
-    HomeScreen({})
+    //Fix preview TODO
+//    HomeScreen({})
 }

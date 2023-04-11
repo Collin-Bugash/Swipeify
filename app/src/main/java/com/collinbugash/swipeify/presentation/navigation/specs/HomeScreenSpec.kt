@@ -14,6 +14,6 @@ object HomeScreenSpec : IScreenSpec {
                          navController: NavController
     ){
         println("HOME CALLED")
-        HomeScreen(onLyricButtonClicked = { navController.navigate("lyric")})
+        HomeScreen(onLyricButtonClicked = { navController.navigate("lyric")}, viewModel = swipeifyViewModel)
     }
 }

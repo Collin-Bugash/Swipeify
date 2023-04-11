@@ -69,4 +69,14 @@ class SwipeifyViewModel(private val swipeifyRepo: SwipeifyRepo) : ViewModel() {
     fun popGenreSelected() {
         mPopGenre.value = !(mPopGenre.value)
     }
+
+    //Function for when user disliked song.  Remove song from respective list and move to next song
+    fun dislikedSong() {
+
+    }
+
+    //Function for when user liked song. Remove song from respective list, add to liked list, and move onto next song
+    fun likedSong() {
+
+    }
 }

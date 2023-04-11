@@ -26,10 +26,11 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.collinbugash.swipeify.api.TrackFetcher
+import com.collinbugash.swipeify.presentation.viewmodel.SwipeifyViewModel
 
 
 @Composable
-fun SongButtons(){
+fun SongButtons(viewModel: SwipeifyViewModel){
     val borderWidth = 3.dp
     val context = LocalContext.current;
 
@@ -43,8 +44,12 @@ fun SongButtons(){
         .padding(vertical = 20.dp)
         .fillMaxWidth(0.75f)
         .fillMaxSize(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.Bottom) {
+
+        //Icon button for disliking a song
         IconButton(
-            onClick = { Toast.makeText(context, "User disliked song", Toast.LENGTH_SHORT).show() },
+            onClick = { Toast.makeText(context, "User disliked song", Toast.LENGTH_SHORT).show()
+                        viewModel.dislikedSong()
+                      },
             modifier = Modifier
                 .size(40.dp)
                 .border(
@@ -61,6 +66,7 @@ fun SongButtons(){
             )
         }
 
+        //Icon button for playing and pausing song
         IconButton(
             onClick =
             {
@@ -96,8 +102,11 @@ fun SongButtons(){
             )
         }
 
+        //Icon button for liking a song
         IconButton(
-            onClick = { Toast.makeText(context, "User liked song", Toast.LENGTH_SHORT).show() },
+            onClick = { Toast.makeText(context, "User liked song", Toast.LENGTH_SHORT).show()
+                        viewModel.likedSong()
+                      },
             modifier = Modifier
                 .size(40.dp)
                 .border(
