@@ -26,8 +26,8 @@ class SwipeifyViewModel(private val swipeifyRepo: SwipeifyRepo) : ViewModel() {
     private val mPianoGenre: MutableStateFlow<Boolean> = MutableStateFlow(false)
     val pianoGenre: Boolean
         get() = mPianoGenre.asStateFlow().value
-    //This variable keeps track if the piano option has been chosen before.  If it hasn't, then we'll want to
-    //Create a list of only piano songs
+    /*This variable keeps track if the piano option has been chosen before.  If it hasn't, then we'll want to
+    create a list of only piano songs*/
     private val mPianoFirst: MutableStateFlow<Boolean> = MutableStateFlow(false)
     //List of piano songs
     private val mPianoSongs: MutableStateFlow<List<Track>> = MutableStateFlow(emptyList())
@@ -37,8 +37,8 @@ class SwipeifyViewModel(private val swipeifyRepo: SwipeifyRepo) : ViewModel() {
     private val mPopGenre: MutableStateFlow<Boolean> = MutableStateFlow(false)
     val popGenre: Boolean
         get() = mPopGenre.asStateFlow().value
-    //This variable keeps track if the piano option has been chosen before.  If it hasn't, then we'll want to
-    //Create a list of only pop songs
+    /*This variable keeps track if the piano option has been chosen before.  If it hasn't, then we'll want to
+    create a list of only pop songs*/
     private val mPopFirst: MutableStateFlow<Boolean> = MutableStateFlow(false)
     //List of pop songs
     private val mPopSongs: MutableStateFlow<List<Track>> = MutableStateFlow(emptyList())
@@ -73,19 +73,28 @@ class SwipeifyViewModel(private val swipeifyRepo: SwipeifyRepo) : ViewModel() {
     //For when piano button is clicked
     fun pianoGenreSelected() {
         mPianoGenre.value = !(mPianoGenre.value)
+        if (mPianoFirst.value == false) {
+            mPianoFirst.value = true
+            //TODO Get piano songs and populate mPianoSongs
+        }
+
     }
 
     //For when piano button is clicked
     fun popGenreSelected() {
         mPopGenre.value = !(mPopGenre.value)
+        if (mPopFirst.value == false) {
+            mPopFirst.value = true
+            //TODO Get pop songs and populate mPopSongs
+        }
     }
 
-    //Function for when user disliked song.  Remove song from respective list and move to next song
+    //TODO: Function for when user disliked song.  Remove song from respective list and move to next song
     fun dislikedSong() {
 
     }
 
-    //Function for when user liked song. Remove song from respective list, add to liked list, and move onto next song
+    //TODO: Function for when user liked song. Remove song from respective list, add to liked list, and move onto next song
     fun likedSong() {
 
     }
