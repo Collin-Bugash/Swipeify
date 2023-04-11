@@ -1,27 +1,24 @@
 package com.collinbugash.swipeify.presentation.settings
 
-import android.widget.Toast
 import androidx.compose.foundation.layout.*
-import androidx.compose.material3.Button
 import androidx.compose.material3.Divider
-import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.collinbugash.swipeify.R
 import com.collinbugash.swipeify.presentation.viewmodel.SwipeifyViewModel
-import org.intellij.lang.annotations.JdkConstants.HorizontalAlignment
 
 @Composable
 fun SettingsScreen(viewModel: SwipeifyViewModel){
     val context = LocalContext.current;
+
+    val genresSelected = remember(viewModel.mGenresSelected) { viewModel.mGenresSelected }
 
     Column(
         modifier = Modifier
@@ -47,29 +44,21 @@ fun SettingsScreen(viewModel: SwipeifyViewModel){
                 verticalAlignment = Alignment.CenterVertically)
             {
                 Text(text = "Select Genres")
-                ResetButton(onClick =  { viewModel.resetGenres() })
+                ResetButton(onClick =  { viewModel.removeAllGenres() })
             }
             Row(modifier = Modifier
                 .fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceEvenly,
                 verticalAlignment = Alignment.CenterVertically)
             {
-//                GenreButton(onClick = { /*TODO*/ }, genreName = stringResource(id = R.string.piano_genre))
-//                GenreButton(onClick = { /*TODO*/ }, genreName = stringResource(id = R.string.pop_genre))
-                Switch(
-                    checked = viewModel.pianoGenre,
-                    onCheckedChange = {viewModel.pianoGenreSelected()}
-                )
-            }
-            Row(modifier = Modifier
-                .fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceEvenly,
-                verticalAlignment = Alignment.CenterVertically)
-            {
-                Switch(
-                    checked = viewModel.popGenre,
-                    onCheckedChange = {viewModel.popGenreSelected()}
-                )
+                for(genre in viewModel.playlists) {
+                    GenreButton(
+                        text = genre.second,
+                        isSelected = viewModel.isGenreSelected(genre.second),
+                        onSelectedChange = { viewModel.toggleGenreSelected(genre.second) },
+                        modifier = Modifier.padding(4.dp)
+                    )
+                }
             }
         }
     }

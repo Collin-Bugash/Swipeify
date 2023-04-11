@@ -12,6 +12,8 @@ interface SwipeifyDao {
     suspend fun addTrack(track: Track)
     @Query("SELECT * FROM track WHERE genre=(:genre)")
     fun getTracksByGenre(genre: String): Flow<List<Track>>
+    @Query("SELECT * FROM track WHERE genre IN (:genres) ORDER BY RANDOM() LIMIT 1")
+    fun getRandomTrackByGenres(genres: List<String>): Flow<Track?>
     @Query("SELECT * FROM track WHERE id=(:id)")
     suspend fun getTrackById(id: Int): Track?
     @Delete

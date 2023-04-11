@@ -1,27 +1,32 @@
 package com.collinbugash.swipeify.presentation.settings
 
-import androidx.compose.foundation.layout.width
+import android.util.Log
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
-import com.collinbugash.swipeify.R
 
-
-// MAY NOT BE USED!!!!!!!!!!!!!!
 @Composable
-fun GenreButton(onClick: () -> Unit, genreName: String) {
+fun GenreButton(
+    text: String,
+    isSelected: Boolean,
+    onSelectedChange: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    val backgroundColor = if (isSelected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.secondary
+    val contentColor = if (isSelected) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onSecondary
+
+    Log.d("COLORS", "${backgroundColor.toString()}, ${contentColor.toString()}")
     Button(
-        modifier = Modifier
-            .width(130.dp),
-        onClick = onClick,
+        onClick = onSelectedChange,
+        colors = ButtonDefaults.buttonColors(
+            containerColor = backgroundColor,
+            contentColor = contentColor
+        ),
+        modifier = modifier
     ) {
-        Text(
-            text = genreName,
-            textAlign = TextAlign.Center
-        )
+        Text(text)
     }
 }
