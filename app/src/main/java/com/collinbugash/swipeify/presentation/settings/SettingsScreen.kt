@@ -60,6 +60,12 @@ fun SettingsScreen(viewModel: SwipeifyViewModel){
                     checked = viewModel.pianoGenre,
                     onCheckedChange = {viewModel.pianoGenreSelected()}
                 )
+            }
+            Row(modifier = Modifier
+                .fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceEvenly,
+                verticalAlignment = Alignment.CenterVertically)
+            {
                 Switch(
                     checked = viewModel.popGenre,
                     onCheckedChange = {viewModel.popGenreSelected()}
