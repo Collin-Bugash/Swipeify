@@ -19,6 +19,6 @@ object SettingsScreenSpec : IScreenSpec{
     override fun Content(swipeifyViewModel : SwipeifyViewModel,
                          navController: NavController
     ){
-        SettingsScreen()
+        SettingsScreen(viewModel = swipeifyViewModel)
     }
 }
