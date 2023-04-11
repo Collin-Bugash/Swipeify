@@ -97,8 +97,9 @@ class SwipeifyViewModel(private val swipeifyRepo: SwipeifyRepo) : ViewModel() {
     fun dislikedSong() {
         //Get the current song
         val newDislikedSong = currentSong
-        //Keep user from disliking liked songs (seems like it could cause some bugs)
+        //Keep user from disliking liked songs (seems like it could cause some bugs), alternatively we can automatically remove from liked songs before disliking
         if(newDislikedSong != null) {
+            Log.d(LOG_TAG, "${newDislikedSong.name} was disliked.")
             if (!mLikedSongs.value.contains(newDislikedSong)) {
                 //TODO: Function to go to next song goes here
                 //TODO: Not sure where to remove song from, uncomment next line to remove song from repo
@@ -112,6 +113,7 @@ class SwipeifyViewModel(private val swipeifyRepo: SwipeifyRepo) : ViewModel() {
         //Get the current song
         val newLikedSong = currentSong
         if(newLikedSong != null) {
+            Log.d(LOG_TAG, "${newLikedSong.name} was liked.")
             //If the current song is not null and is not already liked, add it to the set of liked songs
             if (newLikedSong != null && !mLikedSongs.value.contains(newLikedSong)) {
                 mLikedSongs.value = mLikedSongs.value.plus(newLikedSong);
