@@ -1,6 +1,7 @@
 package com.collinbugash.swipeify.presentation.viewmodel
 
 import android.util.Log
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
@@ -34,7 +35,7 @@ class SwipeifyViewModel(private val swipeifyRepo: SwipeifyRepo) : ViewModel() {
         get() = mPlaylists
 
     // list of states for genres selected / not selected
-    val mGenresSelected = mutableStateOf(mutableSetOf<String>())
+    val mGenresSelected = MutableStateFlow(mutableSetOf<String>())
 
     fun addTrack(trackToAdd: Track) {
         Log.d(LOG_TAG, "adding track $trackToAdd")
@@ -54,7 +55,7 @@ class SwipeifyViewModel(private val swipeifyRepo: SwipeifyRepo) : ViewModel() {
         } else {
             mGenresSelected.value.add(genre)
         }
-        Log.d("GENRES SELECTED: ", mGenresSelected.toString())
+        Log.d("GENRES SELECTED: ", mGenresSelected.value.toString())
     }
     // function to check if genre is selected
     fun isGenreSelected(genre: String): Boolean {
@@ -63,6 +64,7 @@ class SwipeifyViewModel(private val swipeifyRepo: SwipeifyRepo) : ViewModel() {
     // empty all genres selected
     fun removeAllGenres() {
         mGenresSelected.value.clear()
+        Log.d("GENRES SELECTED: ", mGenresSelected.value.toString())
     }
 
     //TODO: Function for when user disliked song.  Remove song from respective list and move to next song

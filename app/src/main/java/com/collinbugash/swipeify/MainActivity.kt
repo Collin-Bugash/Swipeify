@@ -60,18 +60,6 @@ class MainActivity : ComponentActivity() {
             editor.apply()
         }
 
-        // testing db query
-        val popTracks: Flow<List<Track>> = mSwipeifyViewModel.getTracksByGenre("pop")
-        val coroutineScope: CoroutineScope = GlobalScope
-        coroutineScope.launch {
-            popTracks.collect { tracks ->
-                // Log each track in the list
-                tracks.forEach { track ->
-                    Log.d("POP TRACKS", "Track: ${track.name} - ${track.preview_url}")
-                }
-            }
-        }
-
         setContent {
             MainActivityContent(swipeifyViewModel = mSwipeifyViewModel)
         }
