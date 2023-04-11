@@ -96,6 +96,15 @@ class SwipeifyViewModel(private val swipeifyRepo: SwipeifyRepo) : ViewModel() {
 
     //TODO: Function for when user liked song. Remove song from respective list, add to liked list, and move onto next song
     fun likedSong() {
-
+        //Get the current song
+        val newLikedSong = currentSong
+        //If the current song is not null and is not already liked, add it to the set of liked songs
+        if(newLikedSong != null && !mLikedSongs.value.contains(newLikedSong)) {
+            mLikedSongs.value = mLikedSongs.value.plus(newLikedSong);
+        }
+        //If the current song is already liked, remove it from the set of liked songs
+        else if(newLikedSong != null) {
+            mLikedSongs.value = mLikedSongs.value.minus(newLikedSong)
+        }
     }
 }
