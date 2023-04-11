@@ -15,9 +15,10 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.collinbugash.swipeify.presentation.song.SongButtons
+import com.collinbugash.swipeify.presentation.viewmodel.SwipeifyViewModel
 
 @Composable
-fun LyricsScreen(backButtonPressed:() -> Unit){
+fun LyricsScreen(backButtonPressed:() -> Unit, swipeifyViewModel: SwipeifyViewModel){
     val borderWidth = 3.dp
 
     Column {
@@ -51,7 +52,7 @@ fun LyricsScreen(backButtonPressed:() -> Unit){
         Text(text = "Lyrics are here")
 
         Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.Bottom, horizontalAlignment = Alignment.CenterHorizontally) {
-            SongButtons()
+            SongButtons(swipeifyViewModel)
         }
 
 

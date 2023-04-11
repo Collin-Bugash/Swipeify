@@ -43,11 +43,15 @@ class SwipeifyViewModel(private val swipeifyRepo: SwipeifyRepo) : ViewModel() {
     //List of pop songs
     private val mPopSongs: MutableStateFlow<List<Track>> = MutableStateFlow(emptyList())
 
-
-
     //List of liked songs
     private val mLikedSongs: MutableStateFlow<List<Track>> = MutableStateFlow(emptyList())
 
+    // playlist id's that hold songs for each genre
+    // TODO add more genres later
+    private val mPlaylists = listOf(
+        Pair("37i9dQZF1DX4sWSpwq3LiO?si=956da7b0331a4ef7", "piano"),
+        Pair("2UZk7JjJnbTut1w8fqs3JL?si=52b08f117aa44e5f", "pop")
+    )
 
     fun addTrack(trackToAdd: Track) {
         Log.d(LOG_TAG, "adding track $trackToAdd")
@@ -55,7 +59,7 @@ class SwipeifyViewModel(private val swipeifyRepo: SwipeifyRepo) : ViewModel() {
     }
     suspend fun addPlaylists(){
         Log.d(LOG_TAG, "adding playlists songs to db")
-        swipeifyRepo.addPlaylists()
+        swipeifyRepo.addPlaylists(mPlaylists)
     }
 
     fun getTracksByGenre(genre: String): Flow<List<Track>> = swipeifyRepo.getTracksByGenre(genre)
@@ -91,20 +95,35 @@ class SwipeifyViewModel(private val swipeifyRepo: SwipeifyRepo) : ViewModel() {
 
     //TODO: Function for when user disliked song.  Remove song from respective list and move to next song
     fun dislikedSong() {
-
+        //Get the current song
+        val newDislikedSong = currentSong
+        //Keep user from disliking liked songs (seems like it could cause some bugs)
+        if(newDislikedSong != null) {
+            if (!mLikedSongs.value.contains(newDislikedSong)) {
+                //TODO: Function to go to next song goes here
+                //TODO: Not sure where to remove song from, uncomment next line to remove song from repo
+                //swipeifyRepo.deleteTrack(newDislikedSong)
+            }
+        }
     }
 
     //TODO: Function for when user liked song. Remove song from respective list, add to liked list, and move onto next song
     fun likedSong() {
         //Get the current song
         val newLikedSong = currentSong
-        //If the current song is not null and is not already liked, add it to the set of liked songs
-        if(newLikedSong != null && !mLikedSongs.value.contains(newLikedSong)) {
-            mLikedSongs.value = mLikedSongs.value.plus(newLikedSong);
-        }
-        //If the current song is already liked, remove it from the set of liked songs
-        else if(newLikedSong != null) {
-            mLikedSongs.value = mLikedSongs.value.minus(newLikedSong)
+        if(newLikedSong != null) {
+            //If the current song is not null and is not already liked, add it to the set of liked songs
+            if (newLikedSong != null && !mLikedSongs.value.contains(newLikedSong)) {
+                mLikedSongs.value = mLikedSongs.value.plus(newLikedSong);
+
+            }
+            //If the current song is already liked, remove it from the set of liked songs
+            else if (newLikedSong != null) {
+                mLikedSongs.value = mLikedSongs.value.minus(newLikedSong)
+            }
+            //TODO: Function to go to next song goes here
+            //TODO: Not sure where to remove song from, uncomment next line to remove song from repo
+            //swipeifyRepo.deleteTrack(newDislikedSong)
         }
     }
 }
