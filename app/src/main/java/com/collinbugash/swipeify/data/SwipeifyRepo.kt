@@ -2,7 +2,7 @@ package com.collinbugash.swipeify.data
 
 import android.content.Context
 import android.util.Log
-import com.collinbugash.swipeify.api.TrackFetcher
+import com.collinbugash.swipeify.presentation.settings.api.TrackFetcher
 import com.collinbugash.swipeify.data.database.SwipeifyDao
 import com.collinbugash.swipeify.data.database.SwipeifyDatabase
 import com.collinbugash.swipeify.data.db.Track

@@ -20,12 +20,7 @@ import com.collinbugash.swipeify.presentation.viewmodel.SwipeifyViewModel
 
 @SuppressLint("UnrememberedMutableState")
 @Composable
-fun SettingsScreen(viewModel: SwipeifyViewModel){
-    val context = LocalContext.current;
-
-    val genresSelected = viewModel.mGenresSelected.collectAsState()
-    val playlists = viewModel.playlists
-
+fun SettingsScreen(genresSelected: List<String>, playlists: List<Pair<String, String>>, removeAllGenres: () -> Unit, toggleGenreSelected: (String) -> Unit){
     Column(
         modifier = Modifier
             .fillMaxWidth(),
@@ -50,7 +45,7 @@ fun SettingsScreen(viewModel: SwipeifyViewModel){
                 verticalAlignment = Alignment.CenterVertically)
             {
                 Text(text = "Select Genres")
-                ResetButton(onClick =  { viewModel.removeAllGenres() })
+                ResetButton(onClick =  { removeAllGenres() })
             }
             Row(modifier = Modifier
                 .fillMaxWidth(),
@@ -58,11 +53,10 @@ fun SettingsScreen(viewModel: SwipeifyViewModel){
                 verticalAlignment = Alignment.CenterVertically)
             {
                 for(genre in playlists) {
-                    val isSelected = genresSelected.value.contains(genre.second)
                     GenreButton(
                         text = genre.second,
-                        isSelected = isSelected,
-                        onSelectedChange = {genre: String -> viewModel.toggleGenreSelected(genre)},
+                        isSelected = genresSelected.contains(genre.second),
+                        onSelectedChange = {toggleGenreSelected(genre.second)},
                         modifier = Modifier.padding(4.dp)
                     )
                 }

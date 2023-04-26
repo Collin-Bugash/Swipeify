@@ -5,12 +5,14 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.collinbugash.swipeify.data.SwipeifyRepo
 import com.collinbugash.swipeify.data.db.Track
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
 
 class SwipeifyViewModel(private val swipeifyRepo: SwipeifyRepo) : ViewModel() {
     companion object {
@@ -24,6 +26,8 @@ class SwipeifyViewModel(private val swipeifyRepo: SwipeifyRepo) : ViewModel() {
 
     //List of liked songs
     private val mLikedSongs: MutableStateFlow<List<Track>> = MutableStateFlow(emptyList())
+    val likedSongsState: StateFlow<List<Track>>
+        get() = mLikedSongs.asStateFlow()
 
     // playlist id's that hold songs for each genre, also holds setting if they're enabled / disabled
     // TODO add more genres later
@@ -35,14 +39,17 @@ class SwipeifyViewModel(private val swipeifyRepo: SwipeifyRepo) : ViewModel() {
         get() = mPlaylists
 
     // list of states for genres selected / not selected
-    val mGenresSelected = MutableStateFlow(mutableSetOf<String>())
+    private val mGenresSelected: MutableStateFlow<List<String>> = MutableStateFlow(emptyList())
+    val genresSelectedState: StateFlow<List<String>>
+        get() = mGenresSelected.asStateFlow()
+
 
     fun addTrack(trackToAdd: Track) {
         Log.d(LOG_TAG, "adding track $trackToAdd")
         swipeifyRepo.addTrack(trackToAdd)
     }
     fun addPlaylists(){
-        Log.d(LOG_TAG, "adding playlists songs to db")
+        Log.d(LOG_TAG, "adding songs to db")
         swipeifyRepo.addPlaylists(mPlaylists)
     }
 
@@ -50,12 +57,13 @@ class SwipeifyViewModel(private val swipeifyRepo: SwipeifyRepo) : ViewModel() {
 
     // function to toggle genre selected
     fun toggleGenreSelected(genre: String) {
+        val currentGenres = mGenresSelected.value.toMutableList()
         if (mGenresSelected.value.contains(genre)) {
-            mGenresSelected.value.remove(genre)
+            currentGenres.remove(genre)
         } else {
-            mGenresSelected.value.add(genre)
+            currentGenres.add(genre)
         }
-        Log.d("GENRES SELECTED: ", mGenresSelected.value.toString())
+        mGenresSelected.value = currentGenres
     }
     // function to check if genre is selected
     fun isGenreSelected(genre: String): Boolean {
@@ -63,8 +71,7 @@ class SwipeifyViewModel(private val swipeifyRepo: SwipeifyRepo) : ViewModel() {
     }
     // empty all genres selected
     fun removeAllGenres() {
-        mGenresSelected.value.clear()
-        Log.d("GENRES SELECTED: ", mGenresSelected.value.toString())
+        mGenresSelected.value = emptyList()
     }
 
     //TODO: Function for when user disliked song.  Remove song from respective list and move to next song
@@ -105,5 +112,8 @@ class SwipeifyViewModel(private val swipeifyRepo: SwipeifyRepo) : ViewModel() {
 
     init {
         Log.d(LOG_TAG, "View Model Created")
+        viewModelScope.launch {
+
+        }
     }
 }

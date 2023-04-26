@@ -1,4 +1,4 @@
-package com.collinbugash.swipeify.api
+package com.collinbugash.swipeify.presentation.settings.api
 
 import android.util.Log
 import com.collinbugash.swipeify.data.SwipeifyRepo

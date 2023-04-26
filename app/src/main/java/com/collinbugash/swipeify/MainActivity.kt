@@ -48,7 +48,7 @@ class MainActivity : ComponentActivity() {
         val sharedPreferences = getSharedPreferences(PREFS_NAME, 0)
         val isFirstTimeLaunch = sharedPreferences.getBoolean(IS_FIRST_TIME_LAUNCH, true)
         if (isFirstTimeLaunch) {
-            // Insert songs from playlists into db
+            // Populate the database
             val coroutineScope: CoroutineScope = GlobalScope
             coroutineScope.launch {
                 mSwipeifyViewModel.addPlaylists()

@@ -2,6 +2,7 @@ package com.collinbugash.swipeify.presentation.navigation.specs
 
 import android.content.Context
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavController
@@ -19,6 +20,13 @@ object SettingsScreenSpec : IScreenSpec{
     override fun Content(swipeifyViewModel : SwipeifyViewModel,
                          navController: NavController
     ){
-        SettingsScreen(viewModel = swipeifyViewModel)
+        val genresSelected = swipeifyViewModel.genresSelectedState.collectAsState()
+        val playlists = swipeifyViewModel.playlists
+        SettingsScreen(
+            genresSelected = genresSelected.value,
+            playlists = playlists,
+            removeAllGenres = { swipeifyViewModel.removeAllGenres() },
+            toggleGenreSelected = { genre -> swipeifyViewModel.toggleGenreSelected(genre) }
+        )
     }
 }

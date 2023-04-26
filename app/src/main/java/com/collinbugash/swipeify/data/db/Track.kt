@@ -13,4 +13,5 @@ data class Track(
     @ColumnInfo(name = "artists")
     val artists: List<Artist>,
     var genre: String = "",
+    var favorite: Boolean = false
 )

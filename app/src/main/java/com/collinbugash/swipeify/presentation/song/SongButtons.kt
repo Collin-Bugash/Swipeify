@@ -25,7 +25,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import com.collinbugash.swipeify.api.TrackFetcher
+import com.collinbugash.swipeify.presentation.settings.api.TrackFetcher
 import com.collinbugash.swipeify.presentation.viewmodel.SwipeifyViewModel
 
 
