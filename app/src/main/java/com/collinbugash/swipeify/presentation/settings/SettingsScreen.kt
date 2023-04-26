@@ -2,6 +2,9 @@ package com.collinbugash.swipeify.presentation.settings
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -40,7 +43,7 @@ fun SettingsScreen(genresSelected: List<String>, playlists: List<Pair<String, St
 
         ) {
             Row(modifier = Modifier
-                .fillMaxWidth(),
+                .fillMaxWidth().padding(bottom = 20.dp),
                 horizontalArrangement = Arrangement.SpaceEvenly,
                 verticalAlignment = Alignment.CenterVertically)
             {
@@ -52,13 +55,18 @@ fun SettingsScreen(genresSelected: List<String>, playlists: List<Pair<String, St
                 horizontalArrangement = Arrangement.SpaceEvenly,
                 verticalAlignment = Alignment.CenterVertically)
             {
-                for(genre in playlists) {
-                    GenreButton(
-                        text = genre.second,
-                        isSelected = genresSelected.contains(genre.second),
-                        onSelectedChange = {toggleGenreSelected(genre.second)},
-                        modifier = Modifier.padding(4.dp)
-                    )
+                LazyVerticalGrid(
+                    columns = GridCells.Fixed(3), // You can adjust the number of items per row here
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    items(playlists) { genre ->
+                        GenreButton(
+                            text = genre.second,
+                            isSelected = genresSelected.contains(genre.second),
+                            onSelectedChange = { toggleGenreSelected(genre.second) },
+                            modifier = Modifier.padding(4.dp)
+                        )
+                    }
                 }
             }
         }

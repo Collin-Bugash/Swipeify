@@ -33,7 +33,14 @@ class SwipeifyViewModel(private val swipeifyRepo: SwipeifyRepo) : ViewModel() {
     // TODO add more genres later
     private val mPlaylists = listOf(
         Pair("37i9dQZF1DX4sWSpwq3LiO?si=956da7b0331a4ef7", "piano"),
-        Pair("2UZk7JjJnbTut1w8fqs3JL?si=52b08f117aa44e5f", "pop")
+        Pair("2UZk7JjJnbTut1w8fqs3JL?si=52b08f117aa44e5f", "pop"),
+        Pair("6JpQsEf9FrpDAmhKNWIV3B", "rock"),
+        Pair("0HFgdtKVI08nyD0rQtLltH", "R&B"),
+        Pair("37i9dQZF1EQqkOPvHGajmW", "indie"),
+        Pair("37i9dQZF1EQmPV0vrce2QZ", "country"),
+        Pair("37i9dQZF1EQqA6klNdJvwx", "jazz"),
+        Pair("37i9dQZF1EIgbjUtLiWmHt", "rap"),
+        Pair("1lS6v9h4MXOw6f6y8MkS8w", "EDM")
     )
     val playlists: List<Pair<String, String>>
         get() = mPlaylists
