@@ -34,13 +34,13 @@ class SwipeifyViewModel(private val swipeifyRepo: SwipeifyRepo) : ViewModel() {
     private val mPlaylists = listOf(
         Pair("37i9dQZF1DX4sWSpwq3LiO?si=956da7b0331a4ef7", "piano"),
         Pair("2UZk7JjJnbTut1w8fqs3JL?si=52b08f117aa44e5f", "pop"),
-        Pair("6JpQsEf9FrpDAmhKNWIV3B", "rock"),
-        Pair("0HFgdtKVI08nyD0rQtLltH", "R&B"),
-        Pair("37i9dQZF1EQqkOPvHGajmW", "indie"),
-        Pair("37i9dQZF1EQmPV0vrce2QZ", "country"),
-        Pair("37i9dQZF1EQqA6klNdJvwx", "jazz"),
-        Pair("37i9dQZF1EIgbjUtLiWmHt", "rap"),
-        Pair("1lS6v9h4MXOw6f6y8MkS8w", "EDM")
+        Pair("6JpQsEf9FrpDAmhKNWIV3B?si=a1897b6322c44d1d", "rock"),
+        Pair("0HFgdtKVI08nyD0rQtLltH?si=fdc03d8aae674f30", "R&B"),
+        Pair("37i9dQZF1EQqkOPvHGajmW?si=dc47d936ec5646c5", "indie"),
+        Pair("37i9dQZF1EQmPV0vrce2QZ?si=77add11b92c642ea", "country"),
+        Pair("37i9dQZF1EQqA6klNdJvwx?si=b0ce17ea984f4138", "jazz"),
+        Pair("37i9dQZF1EIgbjUtLiWmHt?si=a0c611613fbb46de", "rap"),
+        Pair("1lS6v9h4MXOw6f6y8MkS8w?si=b6bf2968d9124b0e", "EDM")
     )
     val playlists: List<Pair<String, String>>
         get() = mPlaylists
