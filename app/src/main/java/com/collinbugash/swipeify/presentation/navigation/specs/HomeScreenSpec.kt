@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavController
 import com.collinbugash.swipeify.presentation.home.HomeScreen
 import com.collinbugash.swipeify.presentation.viewmodel.SwipeifyViewModel
+import androidx.compose.runtime.collectAsState
 
 object HomeScreenSpec : IScreenSpec {
     override val route: String = "home"
@@ -13,7 +14,15 @@ object HomeScreenSpec : IScreenSpec {
     override fun Content(swipeifyViewModel : SwipeifyViewModel,
                          navController: NavController
     ){
-        println("HOME CALLED")
-        HomeScreen(onLyricButtonClicked = { navController.navigate("lyric")}, viewModel = swipeifyViewModel)
+        val currentSong = swipeifyViewModel.currentSong.collectAsState()
+        val playIconState = swipeifyViewModel.playIconState.collectAsState()
+        HomeScreen(
+            onLyricButtonClicked = { navController.navigate("lyric")},
+            currentSong = currentSong.value,
+            dislikeSong = { swipeifyViewModel.dislikedSong() },
+            likeSong = { swipeifyViewModel.likedSong() },
+            playIconState = playIconState.value,
+            updateIconState = { swipeifyViewModel.updateIconState() }
+        )
     }
 }

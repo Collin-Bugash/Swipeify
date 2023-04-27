@@ -7,9 +7,11 @@ import com.collinbugash.swipeify.data.database.SwipeifyDao
 import com.collinbugash.swipeify.data.database.SwipeifyDatabase
 import com.collinbugash.swipeify.data.db.Track
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class SwipeifyRepo
 private constructor(private val swipeifyDao: SwipeifyDao, private val coroutineScope: CoroutineScope = GlobalScope)
@@ -38,9 +40,17 @@ private constructor(private val swipeifyDao: SwipeifyDao, private val coroutineS
             swipeifyDao.addTrack(track)
         }
     }
-    fun deleteTrack(track: Track) {
-        coroutineScope.launch {
-            swipeifyDao.deleteTrack(track)
+    fun deleteTrack(track: Track?) {
+        if(track != null) {
+            coroutineScope.launch {
+                swipeifyDao.deleteTrack(track)
+            }
+        }
+    }
+
+    suspend fun getRandomTrack(genres: List<String>): Track? {
+        return withContext(Dispatchers.IO) {
+            swipeifyDao.getRandomTrackByGenres(genres)
         }
     }
 
@@ -49,6 +59,14 @@ private constructor(private val swipeifyDao: SwipeifyDao, private val coroutineS
         val trackFetcher = TrackFetcher()
         for (playlist in playlists) {
             trackFetcher.getPlaylistTracks(playlist.first, playlist.second, this)
+        }
+    }
+
+    fun updateTrack(track: Track?) {
+        if(track != null) {
+            coroutineScope.launch {
+                swipeifyDao.updateTrackFavorite(track)
+            }
         }
     }
 

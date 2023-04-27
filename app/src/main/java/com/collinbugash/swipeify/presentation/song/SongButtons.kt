@@ -11,6 +11,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.MailOutline
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.icons.filled.ThumbUp
 import androidx.compose.material3.Button
@@ -25,20 +26,20 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import com.collinbugash.swipeify.data.db.Track
 import com.collinbugash.swipeify.presentation.settings.api.TrackFetcher
 import com.collinbugash.swipeify.presentation.viewmodel.SwipeifyViewModel
 
 
 @Composable
-fun SongButtons(viewModel: SwipeifyViewModel){
+fun SongButtons(
+    dislikeSong: () -> Unit,
+    likeSong: () -> Unit,
+    playIconState: Boolean,
+    updateIconState: () -> Unit
+    ){
     val borderWidth = 3.dp
     val context = LocalContext.current;
-
-    // test song
-    // TODO remove once logic is refactored out
-//    val trackFetcher = TrackFetcher()
-//    val trackState = trackFetcher.trackState.collectAsState()
-//    trackFetcher.getTrack("916424")
 
     Row(modifier = Modifier
         .padding(vertical = 20.dp)
@@ -48,7 +49,7 @@ fun SongButtons(viewModel: SwipeifyViewModel){
         //Icon button for disliking a song
         IconButton(
             onClick = { Toast.makeText(context, "User disliked song", Toast.LENGTH_SHORT).show()
-                        viewModel.dislikedSong()
+                        dislikeSong()
                       },
             modifier = Modifier
                 .size(40.dp)
@@ -70,22 +71,8 @@ fun SongButtons(viewModel: SwipeifyViewModel){
         IconButton(
             onClick =
             {
-                  // TODO refactor mediaplayer out (to viewmodel?)
-                 Toast.makeText(context, "User played song", Toast.LENGTH_SHORT).show()
-//                // test song
-//                val url = trackState.value?.preview ?: "URL IS NULL" // your URL here
-//                Log.d("API", url)
-//                val mediaPlayer = MediaPlayer().apply {
-//                    setAudioAttributes(
-//                        AudioAttributes.Builder()
-//                            .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
-//                            .setUsage(AudioAttributes.USAGE_MEDIA)
-//                            .build()
-//                    )
-//                    setDataSource(url)
-//                    prepare() // might take long! (for buffering, etc)
-//                    start()
-//                }
+                Toast.makeText(context, "User played song", Toast.LENGTH_SHORT).show()
+                updateIconState()
             },
             modifier = Modifier
                 .size(40.dp)
@@ -96,16 +83,24 @@ fun SongButtons(viewModel: SwipeifyViewModel){
                 .padding(borderWidth)
                 .clip(CircleShape)
         ) {
-            Icon(
-                imageVector = Icons.Filled.PlayArrow,
-                contentDescription = "Play",
-            )
+            if(playIconState) {
+                Icon(
+                    imageVector = Icons.Filled.PlayArrow,
+                    contentDescription = "Play",
+                )
+            } else {
+                Icon(
+                    imageVector = Icons.Filled.MailOutline,
+                    contentDescription = "Play",
+                )
+            }
+
         }
 
         //Icon button for liking a song
         IconButton(
             onClick = { Toast.makeText(context, "User liked song", Toast.LENGTH_SHORT).show()
-                        viewModel.likedSong()
+                        likeSong()
                       },
             modifier = Modifier
                 .size(40.dp)

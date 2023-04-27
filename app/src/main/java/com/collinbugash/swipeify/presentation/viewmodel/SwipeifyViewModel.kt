@@ -1,5 +1,7 @@
 package com.collinbugash.swipeify.presentation.viewmodel
 
+import android.media.AudioAttributes
+import android.media.MediaPlayer
 import android.util.Log
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.MutableState
@@ -21,16 +23,10 @@ class SwipeifyViewModel(private val swipeifyRepo: SwipeifyRepo) : ViewModel() {
 
     //Variable to hold current song
     private val mCurrentSong: MutableStateFlow<Track?> = MutableStateFlow(null)
-    val currentSong: Track?
-        get() = mCurrentSong.asStateFlow().value
-
-    //List of liked songs
-    private val mLikedSongs: MutableStateFlow<List<Track>> = MutableStateFlow(emptyList())
-    val likedSongsState: StateFlow<List<Track>>
-        get() = mLikedSongs.asStateFlow()
+    val currentSong: StateFlow<Track?>
+        get() = mCurrentSong.asStateFlow()
 
     // playlist id's that hold songs for each genre, also holds setting if they're enabled / disabled
-    // TODO add more genres later
     private val mPlaylists = listOf(
         Pair("37i9dQZF1DX4sWSpwq3LiO?si=956da7b0331a4ef7", "piano"),
         Pair("2UZk7JjJnbTut1w8fqs3JL?si=52b08f117aa44e5f", "pop"),
@@ -50,6 +46,32 @@ class SwipeifyViewModel(private val swipeifyRepo: SwipeifyRepo) : ViewModel() {
     val genresSelectedState: StateFlow<List<String>>
         get() = mGenresSelected.asStateFlow()
 
+    private val mPlayIcon: MutableStateFlow<Boolean> = MutableStateFlow(true)
+    val playIconState: StateFlow<Boolean>
+        get() = mPlayIcon.asStateFlow()
+
+    private val mediaPlayer = MediaPlayer().apply {
+        setAudioAttributes(
+            AudioAttributes.Builder()
+                .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                .setUsage(AudioAttributes.USAGE_MEDIA)
+                .build()
+        )
+    }
+
+    fun pauseMusic() {
+        mediaPlayer.pause()
+    }
+
+    fun playMusic() {
+        mediaPlayer.start()
+    }
+
+    fun playMusic(url: String) {
+        mediaPlayer.setDataSource(url)
+        mediaPlayer.prepare()
+        mediaPlayer.start()
+    }
 
     fun addTrack(trackToAdd: Track) {
         Log.d(LOG_TAG, "adding track $trackToAdd")
@@ -81,46 +103,36 @@ class SwipeifyViewModel(private val swipeifyRepo: SwipeifyRepo) : ViewModel() {
         mGenresSelected.value = emptyList()
     }
 
-    //TODO: Function for when user disliked song.  Remove song from respective list and move to next song
-    fun dislikedSong() {
-        //Get the current song
-        val newDislikedSong = currentSong
-        //Keep user from disliking liked songs (seems like it could cause some bugs), alternatively we can automatically remove from liked songs before disliking
-        if(newDislikedSong != null) {
-            Log.d(LOG_TAG, "${newDislikedSong.name} was disliked.")
-            if (!mLikedSongs.value.contains(newDislikedSong)) {
-                //TODO: Function to go to next song goes here
-                //TODO: Not sure where to remove song from, uncomment next line to remove song from repo
-                //swipeifyRepo.deleteTrack(newDislikedSong)
-            }
-        }
+    fun updateIconState() {
+        mPlayIcon.value = !mPlayIcon.value
     }
 
-    //TODO: Function for when user liked song. Remove song from respective list, add to liked list, and move onto next song
+    fun dislikedSong() {
+        //Get the current song
+        val newDislikedSong = currentSong.value
+        swipeifyRepo.deleteTrack(newDislikedSong)
+    }
+
     fun likedSong() {
         //Get the current song
-        val newLikedSong = currentSong
-        if(newLikedSong != null) {
-            Log.d(LOG_TAG, "${newLikedSong.name} was liked.")
-            //If the current song is not null and is not already liked, add it to the set of liked songs
-            if (newLikedSong != null && !mLikedSongs.value.contains(newLikedSong)) {
-                mLikedSongs.value = mLikedSongs.value.plus(newLikedSong);
+        val newLikedSong = currentSong.value
+        if (newLikedSong != null) {
+            newLikedSong.favorite = true
+        }
+        swipeifyRepo.updateTrack(newLikedSong)
+    }
 
-            }
-            //If the current song is already liked, remove it from the set of liked songs
-            else if (newLikedSong != null) {
-                mLikedSongs.value = mLikedSongs.value.minus(newLikedSong)
-            }
-            //TODO: Function to go to next song goes here
-            //TODO: Not sure where to remove song from, uncomment next line to remove song from repo
-            //swipeifyRepo.deleteTrack(newDislikedSong)
+    fun getNextTrack() {
+        viewModelScope.launch {
+            val newSong: Track? = swipeifyRepo.getRandomTrack(genresSelectedState.value)
+            mCurrentSong.value = newSong
         }
     }
 
     init {
         Log.d(LOG_TAG, "View Model Created")
         viewModelScope.launch {
-
+            getNextTrack()
         }
     }
 }

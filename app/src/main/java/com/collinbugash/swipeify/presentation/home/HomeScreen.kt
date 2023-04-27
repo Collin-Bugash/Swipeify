@@ -13,6 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.collinbugash.swipeify.data.db.Track
 import com.collinbugash.swipeify.presentation.song.SongButtons
 import com.collinbugash.swipeify.presentation.song.SongImage
 import com.collinbugash.swipeify.presentation.song.SongInformation
@@ -21,7 +22,14 @@ import com.collinbugash.swipeify.presentation.viewmodel.SwipeifyViewModel
 import kotlinx.coroutines.selects.select
 
 @Composable
-fun HomeScreen(onLyricButtonClicked:() -> Unit, viewModel: SwipeifyViewModel){
+fun HomeScreen(
+    onLyricButtonClicked:() -> Unit,
+    currentSong: Track?,
+    dislikeSong: () -> Unit,
+    likeSong: () -> Unit,
+    playIconState: Boolean,
+    updateIconState: () -> Unit
+){
     Card(
         colors = CardDefaults.cardColors(
             containerColor =
@@ -43,9 +51,7 @@ fun HomeScreen(onLyricButtonClicked:() -> Unit, viewModel: SwipeifyViewModel){
                 }
             }
 
-
-
-            SongButtons(viewModel = viewModel)
+            SongButtons(dislikeSong = dislikeSong, likeSong = likeSong, playIconState = playIconState, updateIconState = updateIconState)
         }
     }
 
