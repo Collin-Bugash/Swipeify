@@ -71,6 +71,7 @@ private fun MainActivityContent(swipeifyViewModel: SwipeifyViewModel){
     val navController = rememberNavController()
     val context = LocalContext.current
 
+    swipeifyViewModel.getNextTrack()
 
     SwipeifyTheme {
         // A surface container using the 'background' color from the theme

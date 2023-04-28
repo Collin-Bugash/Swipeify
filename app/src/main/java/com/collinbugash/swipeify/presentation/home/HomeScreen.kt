@@ -42,12 +42,12 @@ fun HomeScreen(
                     .fillMaxWidth().fillMaxHeight(0.80f)
                     .padding(8.dp), horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                item { SongImage(onLyricButtonClicked = { onLyricButtonClicked()/*TODO FILL IN THIS METHOD LATER TO SHOW LYRICS*/})
+                item { SongImage(onLyricButtonClicked = { onLyricButtonClicked()/*TODO FILL IN THIS METHOD LATER TO SHOW LYRICS*/}, currentSong)
 
                      }
 
                 item {
-                    SongInformation()
+                    SongInformation(currentSong)
                 }
             }
 

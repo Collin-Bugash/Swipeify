@@ -23,22 +23,23 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.semantics.Role.Companion.Image
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
 import com.collinbugash.swipeify.R
+import com.collinbugash.swipeify.data.db.Track
 
 
 @Composable
-fun SongImage(onLyricButtonClicked:() -> Unit){
+fun SongImage(onLyricButtonClicked:() -> Unit, currentSong: Track?){
     val borderWidth = 4.dp
     val padding = 10.dp
     val screenWidth = LocalConfiguration.current.screenWidthDp.dp
+    val imageUrl = currentSong?.album?.images?.get(0)?.url
 
     Box(modifier = Modifier.padding(padding).width(screenWidth - padding - padding).height(screenWidth - padding - padding), contentAlignment = Alignment.BottomStart){
 
-        Image(
-            painter = painterResource(id = R.drawable.night_visions_album_cover),
-            contentDescription = "image",
-            contentScale = ContentScale.Crop,
-            modifier = Modifier.fillMaxSize()
+        AsyncImage(modifier = Modifier.fillMaxSize(),
+            contentDescription = "Album Image",
+            model = imageUrl
         )
 
         IconButton(modifier = Modifier.padding(12.dp), onClick = { onLyricButtonClicked() }) {

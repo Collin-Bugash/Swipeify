@@ -14,6 +14,7 @@ import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.MailOutline
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.icons.filled.ThumbUp
+import androidx.compose.material.icons.filled.Pause
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -27,7 +28,7 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.collinbugash.swipeify.data.db.Track
-import com.collinbugash.swipeify.presentation.settings.api.TrackFetcher
+import com.collinbugash.swipeify.api.TrackFetcher
 import com.collinbugash.swipeify.presentation.viewmodel.SwipeifyViewModel
 
 
@@ -90,8 +91,8 @@ fun SongButtons(
                 )
             } else {
                 Icon(
-                    imageVector = Icons.Filled.MailOutline,
-                    contentDescription = "Play",
+                    imageVector = Icons.Filled.Pause,
+                    contentDescription = "Pause",
                 )
             }
 

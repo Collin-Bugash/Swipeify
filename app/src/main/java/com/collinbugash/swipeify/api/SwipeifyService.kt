@@ -1,4 +1,4 @@
-package com.collinbugash.swipeify.presentation.settings.api
+package com.collinbugash.swipeify.api
 
 import com.collinbugash.swipeify.data.db.Lyrics
 import com.collinbugash.swipeify.data.db.PlaylistTracks
