@@ -15,7 +15,7 @@ interface SwipeifyDao {
     @Query("SELECT * FROM track WHERE genre IN (:genres) AND favorite = 0 ORDER BY RANDOM() LIMIT 1")
     fun getRandomTrackByGenres(genres: List<String>): Track?
     @Query("SELECT * FROM track WHERE favorite = 1")
-    fun getFavoritedSongs(): List<Track>
+    fun getFavoritedSongs(): Flow<List<Track>>
     @Query("SELECT * FROM track WHERE id=(:id)")
     suspend fun getTrackById(id: Int): Track?
     @Delete

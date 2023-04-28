@@ -1,4 +1,4 @@
-package com.collinbugash.swipeify.presentation.song
+package com.collinbugash.swipeify.presentation.playlist
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable

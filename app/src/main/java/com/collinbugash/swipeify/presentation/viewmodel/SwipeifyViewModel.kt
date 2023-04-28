@@ -8,12 +8,14 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.collinbugash.swipeify.data.SwipeifyRepo
 import com.collinbugash.swipeify.data.db.Track
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class SwipeifyViewModel(private val swipeifyRepo: SwipeifyRepo) : ViewModel() {
@@ -71,7 +73,7 @@ class SwipeifyViewModel(private val swipeifyRepo: SwipeifyRepo) : ViewModel() {
         mediaPlayer.pause()
     }
 
-    fun playMusic() {
+    fun resumeMusic() {
         mediaPlayer.start()
     }
 
@@ -90,10 +92,10 @@ class SwipeifyViewModel(private val swipeifyRepo: SwipeifyRepo) : ViewModel() {
         swipeifyRepo.addPlaylists(mPlaylists)
     }
 
-    suspend fun getLikedSongs() {
-        Log.d(LOG_TAG, "getting the songs a user has liked")
-        mLikedSongs.value = swipeifyRepo.getFavoritedSongs()
-    }
+//    suspend fun getLikedSongs() {
+//        Log.d(LOG_TAG, "getting the songs a user has liked")
+//        mLikedSongs.value = swipeifyRepo.getFavoritedSongs()
+//    }
 
     fun getTracksByGenre(genre: String): Flow<List<Track>> = swipeifyRepo.getTracksByGenre(genre)
 
@@ -133,10 +135,8 @@ class SwipeifyViewModel(private val swipeifyRepo: SwipeifyRepo) : ViewModel() {
         if (newLikedSong != null) {
             newLikedSong.favorite = true
         }
-        viewModelScope.launch {
-            getLikedSongs()
-        }
         swipeifyRepo.updateTrack(newLikedSong)
+        Log.d("448.LikedSongs", mLikedSongs.value.size.toString())
         getNextTrack()
     }
 
@@ -154,5 +154,10 @@ class SwipeifyViewModel(private val swipeifyRepo: SwipeifyRepo) : ViewModel() {
 
     init {
         Log.d(LOG_TAG, "View Model Created")
+        viewModelScope.launch {
+            swipeifyRepo.getFavoritedSongs().collect { favoritedList ->
+                mLikedSongs.update { favoritedList }
+            }
+        }
     }
 }

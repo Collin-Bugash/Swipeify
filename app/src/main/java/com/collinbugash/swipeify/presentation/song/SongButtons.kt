@@ -37,7 +37,8 @@ fun SongButtons(
     dislikeSong: () -> Unit,
     likeSong: () -> Unit,
     playIconState: Boolean,
-    updateIconState: () -> Unit
+    updateIconState: () -> Unit,
+
     ){
     val borderWidth = 3.dp
     val context = LocalContext.current;
@@ -72,8 +73,8 @@ fun SongButtons(
         IconButton(
             onClick =
             {
-                Toast.makeText(context, "User played song", Toast.LENGTH_SHORT).show()
                 updateIconState()
+
             },
             modifier = Modifier
                 .size(40.dp)

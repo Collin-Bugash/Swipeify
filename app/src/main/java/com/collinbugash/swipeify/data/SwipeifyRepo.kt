@@ -71,11 +71,13 @@ private constructor(private val swipeifyDao: SwipeifyDao, private val coroutineS
         }
     }
 
-    suspend fun getFavoritedSongs(): List<Track>  {
-        return withContext(Dispatchers.IO) {
-            swipeifyDao.getFavoritedSongs()
-        }
-    }
+//    suspend fun getFavoritedSongs(): List<Track>  {
+//        return withContext(Dispatchers.IO) {
+//            swipeifyDao.getFavoritedSongs()
+//        }
+//    }
+
+    fun getFavoritedSongs(): Flow<List<Track>> = swipeifyDao.getFavoritedSongs()
 
     init {
         Log.d(LOG_TAG, "initializing repo list")
