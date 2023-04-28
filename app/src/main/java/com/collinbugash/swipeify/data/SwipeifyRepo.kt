@@ -71,6 +71,12 @@ private constructor(private val swipeifyDao: SwipeifyDao, private val coroutineS
         }
     }
 
+    suspend fun getFavoritedSongs(): List<Track>  {
+        return withContext(Dispatchers.IO) {
+            swipeifyDao.getFavoritedSongs()
+        }
+    }
+
     init {
         Log.d(LOG_TAG, "initializing repo list")
 

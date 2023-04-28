@@ -35,7 +35,11 @@ fun SongImage(onLyricButtonClicked:() -> Unit, currentSong: Track?){
     val screenWidth = LocalConfiguration.current.screenWidthDp.dp
     val imageUrl = currentSong?.album?.images?.get(0)?.url
 
-    Box(modifier = Modifier.padding(padding).width(screenWidth - padding - padding).height(screenWidth - padding - padding), contentAlignment = Alignment.BottomStart){
+    Box(modifier = Modifier
+        .padding(padding)
+        .width(screenWidth - padding - padding)
+        .height(screenWidth - padding - padding),
+        contentAlignment = Alignment.BottomStart){
 
         AsyncImage(modifier = Modifier.fillMaxSize(),
             contentDescription = "Album Image",

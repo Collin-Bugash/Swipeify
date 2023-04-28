@@ -13,9 +13,10 @@ import com.collinbugash.swipeify.data.Song
 import com.collinbugash.swipeify.presentation.song.SongLiked
 import com.collinbugash.swipeify.ui.theme.SwipeifyTheme
 import androidx.compose.foundation.lazy.items
+import com.collinbugash.swipeify.data.db.Track
 
 @Composable
-fun PlaylistScreen(songList : List<Song>){
+fun PlaylistScreen(songList : List<Track>){
     Column() {
         Text(text = "Liked Songs")
 

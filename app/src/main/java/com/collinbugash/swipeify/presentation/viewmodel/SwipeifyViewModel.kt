@@ -26,6 +26,11 @@ class SwipeifyViewModel(private val swipeifyRepo: SwipeifyRepo) : ViewModel() {
     val currentSong: StateFlow<Track?>
         get() = mCurrentSong.asStateFlow()
 
+    //Variable to hold current list of liked songs
+    private val mLikedSongs: MutableStateFlow<List<Track>> = MutableStateFlow(emptyList())
+    val likedSongs: StateFlow<List<Track>>
+        get() = mLikedSongs.asStateFlow()
+
     // playlist id's that hold songs for each genre, also holds setting if they're enabled / disabled
 //    private val mGenres = listOf("piano", "pop", "rock", "R&B", "indie", "country", "jazz", "rap", "EDM")
     private val mGenres = listOf("Piano", "Pop")
@@ -85,6 +90,11 @@ class SwipeifyViewModel(private val swipeifyRepo: SwipeifyRepo) : ViewModel() {
         swipeifyRepo.addPlaylists(mPlaylists)
     }
 
+    suspend fun getLikedSongs() {
+        Log.d(LOG_TAG, "getting the songs a user has liked")
+        mLikedSongs.value = swipeifyRepo.getFavoritedSongs()
+    }
+
     fun getTracksByGenre(genre: String): Flow<List<Track>> = swipeifyRepo.getTracksByGenre(genre)
 
     // function to toggle genre selected
@@ -122,6 +132,9 @@ class SwipeifyViewModel(private val swipeifyRepo: SwipeifyRepo) : ViewModel() {
         val newLikedSong = currentSong.value
         if (newLikedSong != null) {
             newLikedSong.favorite = true
+        }
+        viewModelScope.launch {
+            getLikedSongs()
         }
         swipeifyRepo.updateTrack(newLikedSong)
         getNextTrack()

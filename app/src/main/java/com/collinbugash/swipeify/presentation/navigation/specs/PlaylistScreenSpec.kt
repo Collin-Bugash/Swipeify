@@ -2,6 +2,7 @@ package com.collinbugash.swipeify.presentation.navigation.specs
 
 import android.content.Context
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavController
@@ -20,6 +21,7 @@ object PlaylistScreenSpec : IScreenSpec {
     override fun Content(swipeifyViewModel : SwipeifyViewModel,
                          navController: NavController
     ){
-        PlaylistScreen(SongRepo.songs)
+        val likedSongs = swipeifyViewModel.likedSongs.collectAsState()
+        PlaylistScreen(songList = likedSongs.value)
     }
 }
