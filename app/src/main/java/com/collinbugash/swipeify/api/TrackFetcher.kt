@@ -73,7 +73,7 @@ class TrackFetcher {
         swipeifyRequest.enqueue(object: Callback<PlaylistTracks> {
             override fun onFailure(call: Call<PlaylistTracks>, t: Throwable) {
                 mPlaylistTracksState.update { null }
-                Log.d("API", "ERROR WITH FETCHING PLAYLIST TRACKS: ${t.message}")
+                Log.d("448.API", "ERROR WITH FETCHING PLAYLIST TRACKS: ${t.message}")
             }
             override fun onResponse(call: Call<PlaylistTracks>, response: Response<PlaylistTracks>) {
                 val swipeifyResponse = response.body()
@@ -87,7 +87,7 @@ class TrackFetcher {
                             }
 //                            Log.d("API: CURRENT TRACK", item.track.preview_url)
                         }
-                        Log.d("API", "FINISHED ADDING")
+                        Log.d("448.API", "FINISHED ADDING")
                 }
             }
         })

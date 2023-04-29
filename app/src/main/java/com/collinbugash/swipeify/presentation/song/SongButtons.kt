@@ -50,7 +50,7 @@ fun SongButtons(
 
         //Icon button for disliking a song
         IconButton(
-            onClick = { Toast.makeText(context, "User disliked song", Toast.LENGTH_SHORT).show()
+            onClick = {
                         dislikeSong()
                       },
             modifier = Modifier
@@ -101,7 +101,7 @@ fun SongButtons(
 
         //Icon button for liking a song
         IconButton(
-            onClick = { Toast.makeText(context, "User liked song", Toast.LENGTH_SHORT).show()
+            onClick = {
                         likeSong()
                       },
             modifier = Modifier

@@ -56,9 +56,11 @@ class SwipeifyViewModel(private val swipeifyRepo: SwipeifyRepo) : ViewModel() {
     val genresSelectedState: StateFlow<List<String>>
         get() = mGenresSelected.asStateFlow()
 
-    private val mPlayIcon: MutableStateFlow<Boolean> = MutableStateFlow(true)
+    private val mPlayIcon: MutableStateFlow<Boolean> = MutableStateFlow(false)
     val playIconState: StateFlow<Boolean>
         get() = mPlayIcon.asStateFlow()
+
+    val playedNewSong: MutableState<Boolean> = mutableStateOf(true)
 
     private val mediaPlayer = MediaPlayer().apply {
         setAudioAttributes(
@@ -78,6 +80,7 @@ class SwipeifyViewModel(private val swipeifyRepo: SwipeifyRepo) : ViewModel() {
     }
 
     fun playMusic(url: String) {
+        mediaPlayer.reset()
         mediaPlayer.setDataSource(url)
         mediaPlayer.prepare()
         mediaPlayer.start()
@@ -120,9 +123,22 @@ class SwipeifyViewModel(private val swipeifyRepo: SwipeifyRepo) : ViewModel() {
 
     fun updateIconState() {
         mPlayIcon.value = !mPlayIcon.value
+        if(playedNewSong.value) {
+            playedNewSong.value = false
+            pauseMusic()
+        } else {
+            if(mPlayIcon.value) {
+                pauseMusic()
+            } else {
+                resumeMusic()
+            }
+        }
     }
 
     fun dislikedSong() {
+        mediaPlayer.reset()
+        playedNewSong.value = true
+        mPlayIcon.value = false
         //Get the current song
         val newDislikedSong = currentSong.value
         swipeifyRepo.deleteTrack(newDislikedSong)
@@ -130,6 +146,9 @@ class SwipeifyViewModel(private val swipeifyRepo: SwipeifyRepo) : ViewModel() {
     }
 
     fun likedSong() {
+        mediaPlayer.reset()
+        playedNewSong.value = true
+        mPlayIcon.value = false
         //Get the current song
         val newLikedSong = currentSong.value
         if (newLikedSong != null) {
@@ -141,14 +160,18 @@ class SwipeifyViewModel(private val swipeifyRepo: SwipeifyRepo) : ViewModel() {
     }
 
     fun getNextTrack() {
+        Log.d(LOG_TAG, "Getting next song")
         viewModelScope.launch {
             if(genresSelectedState.value.isNotEmpty()) {
                 val newSong: Track? = swipeifyRepo.getRandomTrack(genresSelectedState.value)
                 mCurrentSong.value = newSong
+                Log.d(LOG_TAG, "Current song: ${newSong.toString()}")
             } else {
                 val newSong: Track? = swipeifyRepo.getRandomTrack(mGenres)
                 mCurrentSong.value = newSong
+                Log.d(LOG_TAG, "Current song: ${newSong.toString()}")
             }
+            mCurrentSong.value?.let { playMusic(it.preview_url) }
         }
     }
 
