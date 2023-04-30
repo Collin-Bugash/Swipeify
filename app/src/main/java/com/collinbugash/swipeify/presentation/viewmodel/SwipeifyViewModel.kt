@@ -103,7 +103,9 @@ class SwipeifyViewModel(private val swipeifyRepo: SwipeifyRepo) : ViewModel() {
 
     fun getLyrics() {
         Log.d(LOG_TAG, "getting the current song's lyrics")
-        mCurrentSong.value?.let { swipeifyRepo.getLyrics(it.id) }
+        val givenLyrics: Lyrics? = mCurrentSong.value?.let { swipeifyRepo.getLyrics(it.id) }
+        mCurrentLyrics.value = givenLyrics
+        Log.d(LOG_TAG, "lyrics: ${givenLyrics?.lines}")
     }
 
 //    suspend fun getLikedSongs() {

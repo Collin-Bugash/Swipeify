@@ -5,6 +5,7 @@ import android.util.Log
 import com.collinbugash.swipeify.api.TrackFetcher
 import com.collinbugash.swipeify.data.database.SwipeifyDao
 import com.collinbugash.swipeify.data.database.SwipeifyDatabase
+import com.collinbugash.swipeify.data.db.Lyrics
 import com.collinbugash.swipeify.data.db.Track
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -64,9 +65,10 @@ private constructor(private val swipeifyDao: SwipeifyDao, private val coroutineS
     }
 
     // Gets the lyrivs given an id
-    fun getLyrics(trackId: String) {
+    fun getLyrics(trackId: String): Lyrics? {
         val trackFetcher = TrackFetcher()
         trackFetcher.getTrackLyrics(trackId)
+        return trackFetcher.trackLyricsState.value
     }
 
     fun updateTrack(track: Track?) {
