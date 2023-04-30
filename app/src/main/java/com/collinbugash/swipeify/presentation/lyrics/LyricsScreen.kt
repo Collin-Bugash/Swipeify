@@ -3,6 +3,7 @@ package com.collinbugash.swipeify.presentation.lyrics
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
@@ -15,15 +16,22 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.collinbugash.swipeify.data.db.Lyrics
 import com.collinbugash.swipeify.presentation.song.SongButtons
 import com.collinbugash.swipeify.presentation.viewmodel.SwipeifyViewModel
+import androidx.compose.foundation.lazy.items
 
 @Composable
-fun LyricsScreen(backButtonPressed:() -> Unit, swipeifyViewModel: SwipeifyViewModel){
+fun LyricsScreen(
+    backButtonPressed:() -> Unit,
+    swipeifyViewModel: SwipeifyViewModel,
+    currentLyrics: Lyrics?){
     val borderWidth = 3.dp
 
     Column {
-        Row(modifier = Modifier.fillMaxWidth().padding(12.dp), horizontalArrangement = Arrangement.SpaceBetween){
+        Row(modifier = Modifier
+            .fillMaxWidth()
+            .padding(12.dp), horizontalArrangement = Arrangement.SpaceBetween){
             Text(text = "Song Name")
 
             IconButton(
@@ -49,8 +57,22 @@ fun LyricsScreen(backButtonPressed:() -> Unit, swipeifyViewModel: SwipeifyViewMo
             color = MaterialTheme.colorScheme.tertiary
 
         )
-        
-        Text(text = "Lyrics are here")
+        //Populating lyrics
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxWidth()
+                .fillMaxHeight(0.80f)
+                .padding(8.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            if (currentLyrics != null) {
+                items(currentLyrics.lines) { line ->
+                    Text(text = line.words)
+                }
+            } else {
+                item { Text(text = "No lyrics found") }
+            }
+        }
 
         val playIconState = swipeifyViewModel.playIconState.collectAsState()
         Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.Bottom, horizontalAlignment = Alignment.CenterHorizontally) {

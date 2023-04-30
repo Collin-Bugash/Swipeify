@@ -2,6 +2,7 @@ package com.collinbugash.swipeify.presentation.navigation.specs
 
 import android.content.Context
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.navigation.*
 import com.collinbugash.swipeify.presentation.home.HomeScreen
 import com.collinbugash.swipeify.presentation.lyrics.LyricsScreen
@@ -18,6 +19,11 @@ object LyricsScreenSpec : IScreenSpec{
     override fun Content(swipeifyViewModel : SwipeifyViewModel,
                          navController: NavController
     ){
-        LyricsScreen(backButtonPressed = { navController.navigate("home") }, swipeifyViewModel = swipeifyViewModel)
+        val currentLyrics = swipeifyViewModel.currentLyrics.collectAsState()
+        LyricsScreen(
+            backButtonPressed = { navController.navigate("home") },
+            swipeifyViewModel = swipeifyViewModel,
+            currentLyrics = currentLyrics.value
+        )
     }
 }
