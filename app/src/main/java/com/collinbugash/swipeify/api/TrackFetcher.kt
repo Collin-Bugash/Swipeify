@@ -51,6 +51,7 @@ class TrackFetcher {
 
     // Function to make an API call for a Track's lyrics
     fun getTrackLyrics(trackId: String) {
+        Log.d("API", "Track ID: $trackId")
         val swipeifyRequest = swipeifyService.getTrackLyrics(trackId)
         swipeifyRequest.enqueue(object : Callback<Lyrics> {
             override fun onFailure(call: Call<Lyrics>, t: Throwable) {
