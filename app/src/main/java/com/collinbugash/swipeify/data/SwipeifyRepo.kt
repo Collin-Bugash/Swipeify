@@ -66,10 +66,9 @@ private constructor(private val swipeifyDao: SwipeifyDao, private val coroutineS
     }
 
     // Gets the lyrivs given an id
-    fun getLyrics(trackId: String): LyricTrack? {
+    fun getLyrics(trackId: String) {
         val trackFetcher = TrackFetcher()
         trackFetcher.getTrackLyrics(trackId)
-        return trackFetcher.trackLyricsState.value
     }
 
     fun updateTrack(track: Track?) {

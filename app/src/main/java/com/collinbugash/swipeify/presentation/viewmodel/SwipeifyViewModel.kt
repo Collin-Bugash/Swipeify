@@ -35,10 +35,6 @@ class SwipeifyViewModel(private val swipeifyRepo: SwipeifyRepo) : ViewModel() {
     val likedSongs: StateFlow<List<Track>>
         get() = mLikedSongs.asStateFlow()
 
-    //Variable to hold current lyrics
-    private val mCurrentLyrics: MutableStateFlow<LyricTrack?> = MutableStateFlow(null)
-    val currentLyrics: StateFlow<LyricTrack?>
-        get() = mCurrentLyrics.asStateFlow()
 
     // playlist id's that hold songs for each genre, also holds setting if they're enabled / disabled
 //    private val mGenres = listOf("piano", "pop", "rock", "R&B", "indie", "country", "jazz", "rap", "EDM")
@@ -103,10 +99,7 @@ class SwipeifyViewModel(private val swipeifyRepo: SwipeifyRepo) : ViewModel() {
     }
 
     fun getLyrics() {
-        Log.d(LOG_TAG, "getting the current song's lyrics")
-        val givenLyrics: LyricTrack? = mCurrentSong.value?.let { swipeifyRepo.getLyrics(it.id) }
-        mCurrentLyrics.value = givenLyrics
-        Log.d(LOG_TAG, "lyrics: ${givenLyrics?.lyricTrack?.lyrics}")
+        mCurrentSong.value?.let { swipeifyRepo.getLyrics(it.id) }
     }
 
 //    suspend fun getLikedSongs() {

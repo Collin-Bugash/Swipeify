@@ -11,6 +11,7 @@ import com.collinbugash.swipeify.data.SongRepo
 import com.collinbugash.swipeify.presentation.home.HomeScreen
 import com.collinbugash.swipeify.presentation.playlist.PlaylistScreen
 import com.collinbugash.swipeify.presentation.viewmodel.SwipeifyViewModel
+import kotlinx.coroutines.CoroutineScope
 
 object PlaylistScreenSpec : IScreenSpec {
     override val route: String
@@ -19,7 +20,8 @@ object PlaylistScreenSpec : IScreenSpec {
 
     @Composable
     override fun Content(swipeifyViewModel : SwipeifyViewModel,
-                         navController: NavController
+                         navController: NavController,
+                         coroutineScope: CoroutineScope
     ){
         val likedSongs = swipeifyViewModel.likedSongs.collectAsState()
         PlaylistScreen(songList = likedSongs.value)

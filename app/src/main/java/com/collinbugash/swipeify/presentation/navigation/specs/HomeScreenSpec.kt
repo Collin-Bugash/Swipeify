@@ -5,6 +5,7 @@ import androidx.navigation.NavController
 import com.collinbugash.swipeify.presentation.home.HomeScreen
 import com.collinbugash.swipeify.presentation.viewmodel.SwipeifyViewModel
 import androidx.compose.runtime.collectAsState
+import kotlinx.coroutines.CoroutineScope
 
 object HomeScreenSpec : IScreenSpec {
     override val route: String = "home"
@@ -12,7 +13,8 @@ object HomeScreenSpec : IScreenSpec {
 
     @Composable
     override fun Content(swipeifyViewModel : SwipeifyViewModel,
-                         navController: NavController
+                         navController: NavController,
+                         coroutineScope: CoroutineScope
     ){
         val currentSong = swipeifyViewModel.currentSong.collectAsState()
         val playIconState = swipeifyViewModel.playIconState.collectAsState()

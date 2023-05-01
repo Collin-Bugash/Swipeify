@@ -10,9 +10,10 @@ import androidx.navigation.compose.navigation
 import androidx.navigation.navigation
 import com.collinbugash.swipeify.presentation.navigation.specs.IScreenSpec
 import com.collinbugash.swipeify.presentation.viewmodel.SwipeifyViewModel
+import kotlinx.coroutines.CoroutineScope
 
 @Composable
-fun SwipeifyNavHost(modifier: Modifier = Modifier, navController: NavHostController, swipeifyViewModel: SwipeifyViewModel) {
+fun SwipeifyNavHost(modifier: Modifier = Modifier, navController: NavHostController, swipeifyViewModel: SwipeifyViewModel, coroutineScope: CoroutineScope) {
     NavHost(modifier = modifier,
         navController = navController, startDestination = IScreenSpec.root
     ) {
@@ -24,7 +25,8 @@ fun SwipeifyNavHost(modifier: Modifier = Modifier, navController: NavHostControl
                     ) { navBackStackEntry ->
                         screen.Content(
                             navController = navController,
-                            swipeifyViewModel = swipeifyViewModel
+                            swipeifyViewModel = swipeifyViewModel,
+                            coroutineScope = coroutineScope
                         )
                     }
                 }

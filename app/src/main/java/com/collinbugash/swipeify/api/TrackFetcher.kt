@@ -52,22 +52,23 @@ class TrackFetcher {
 
     // Function to make an API call for a Track's lyrics
     fun getTrackLyrics(trackId: String) {
-        Log.d("API", "Track ID: $trackId")
+        Log.d("448.API", "Track ID: $trackId")
         val swipeifyRequest = swipeifyService.getTrackLyrics(trackId)
         swipeifyRequest.enqueue(object : Callback<LyricTrack> {
             override fun onFailure(call: Call<LyricTrack>, t: Throwable) {
                 mTrackLyricsState.update { null }
-                Log.d("API", "ERROR WITH FETCHING TRACK LYRICS: ${t.message}")
+                Log.d("448.API", "ERROR WITH FETCHING TRACK LYRICS: ${t.message}")
             }
             override fun onResponse(call: Call<LyricTrack>, response: Response<LyricTrack>) {
                 val swipeifyResponse = response.body()
                 if (swipeifyResponse == null) {
-                    Log.d("API", "Response to get lyrics is null!")
+                    Log.d("448.API", "Response to get lyrics is null!")
                     mTrackLyricsState.update { null }
                 } else {
                     mTrackLyricsState.update { swipeifyResponse }
+                    Log.d("448.APILyrics", mTrackLyricsState.value.toString())
                 }
-                Log.d("API", "Response (TrackLyrics): $swipeifyResponse")
+                Log.d("448.API", "Response (TrackLyrics): $swipeifyResponse")
             }
         })
     }

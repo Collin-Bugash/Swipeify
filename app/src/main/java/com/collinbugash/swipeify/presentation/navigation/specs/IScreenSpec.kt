@@ -16,13 +16,16 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.collinbugash.swipeify.data.NavigationBarRepo
 import com.collinbugash.swipeify.presentation.viewmodel.SwipeifyViewModel
+import kotlinx.coroutines.CoroutineScope
 
 sealed interface IScreenSpec {
     val route: String
 
     @Composable
     fun Content(swipeifyViewModel : SwipeifyViewModel,
-                navController: NavController)
+                navController: NavController,
+                coroutineScope: CoroutineScope
+    )
 
     companion object {
         private const val LOG_TAG = "448.IScreenSpec"

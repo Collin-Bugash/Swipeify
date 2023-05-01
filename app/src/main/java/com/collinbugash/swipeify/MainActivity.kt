@@ -10,6 +10,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.ViewModelProvider
@@ -71,6 +72,7 @@ class MainActivity : ComponentActivity() {
 private fun MainActivityContent(swipeifyViewModel: SwipeifyViewModel){
     val navController = rememberNavController()
     val context = LocalContext.current
+    val coroutineScope = rememberCoroutineScope()
 
     swipeifyViewModel.getNextTrack()
 
@@ -85,7 +87,7 @@ private fun MainActivityContent(swipeifyViewModel: SwipeifyViewModel){
                 swipeifyViewModel = swipeifyViewModel,
                 context = context
             )}) {
-                contentPadding ->  SwipeifyNavHost(modifier = Modifier.padding(contentPadding), navController = navController, swipeifyViewModel = swipeifyViewModel)
+                contentPadding ->  SwipeifyNavHost(modifier = Modifier.padding(contentPadding), navController = navController, swipeifyViewModel = swipeifyViewModel, coroutineScope = coroutineScope)
             }
         }
     }

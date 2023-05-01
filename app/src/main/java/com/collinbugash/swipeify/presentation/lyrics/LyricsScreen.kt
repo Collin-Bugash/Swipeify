@@ -1,5 +1,6 @@
 package com.collinbugash.swipeify.presentation.lyrics
 
+import android.util.Log
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
@@ -20,12 +21,13 @@ import com.collinbugash.swipeify.data.db.Lyrics
 import com.collinbugash.swipeify.presentation.song.SongButtons
 import com.collinbugash.swipeify.presentation.viewmodel.SwipeifyViewModel
 import androidx.compose.foundation.lazy.items
+import com.collinbugash.swipeify.data.db.LyricTrack
 
 @Composable
 fun LyricsScreen(
     backButtonPressed:() -> Unit,
     swipeifyViewModel: SwipeifyViewModel,
-    currentLyrics: Lyrics?){
+    currentLyrics: LyricTrack?){
     val borderWidth = 3.dp
 
     Column {
@@ -55,10 +57,9 @@ fun LyricsScreen(
             .fillMaxWidth()
             .height(4.dp),
             color = MaterialTheme.colorScheme.tertiary
-
         )
 
-        Text(text = "Language: ${currentLyrics?.language}")
+        Text(text = "Language: ${currentLyrics?.lyrics?.language}")
         //Populating lyrics
         LazyColumn(
             modifier = Modifier
@@ -68,7 +69,7 @@ fun LyricsScreen(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             if (currentLyrics != null) {
-                items(currentLyrics.lines) { line ->
+                items(currentLyrics.lyrics.lines) { line ->
                     Text(text = line.words)
                 }
             } else {
