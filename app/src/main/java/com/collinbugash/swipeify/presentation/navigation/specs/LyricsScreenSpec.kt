@@ -23,8 +23,11 @@ object LyricsScreenSpec : IScreenSpec{
                          navController: NavController,
                          coroutineScope: CoroutineScope
     ){
+
         val swipeifyFetchr = remember { TrackFetcher() }
         val lyricsState = swipeifyFetchr.trackLyricsState.collectAsState(context = coroutineScope.coroutineContext)
+        val currentSong = swipeifyViewModel.currentSong.collectAsState()
+        currentSong.value?.let { swipeifyFetchr.getTrackLyrics(it.id) }
 
         LyricsScreen(
             backButtonPressed = { navController.navigate("home") },

@@ -5,6 +5,8 @@ import androidx.navigation.NavController
 import com.collinbugash.swipeify.presentation.home.HomeScreen
 import com.collinbugash.swipeify.presentation.viewmodel.SwipeifyViewModel
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.remember
+import com.collinbugash.swipeify.api.TrackFetcher
 import kotlinx.coroutines.CoroutineScope
 
 object HomeScreenSpec : IScreenSpec {
@@ -18,9 +20,9 @@ object HomeScreenSpec : IScreenSpec {
     ){
         val currentSong = swipeifyViewModel.currentSong.collectAsState()
         val playIconState = swipeifyViewModel.playIconState.collectAsState()
+
         HomeScreen(
             onLyricButtonClicked = {
-                swipeifyViewModel.getLyrics()
                 navController.navigate("lyric") },
             currentSong = currentSong.value,
             dislikeSong = { swipeifyViewModel.dislikedSong() },
