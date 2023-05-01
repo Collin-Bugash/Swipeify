@@ -17,8 +17,9 @@ object HomeScreenSpec : IScreenSpec {
         val currentSong = swipeifyViewModel.currentSong.collectAsState()
         val playIconState = swipeifyViewModel.playIconState.collectAsState()
         HomeScreen(
-            onLyricButtonClicked = { navController.navigate("lyric")
-                                     swipeifyViewModel.getLyrics() },
+            onLyricButtonClicked = {
+                swipeifyViewModel.getLyrics()
+                navController.navigate("lyric") },
             currentSong = currentSong.value,
             dislikeSong = { swipeifyViewModel.dislikedSong() },
             likeSong = { swipeifyViewModel.likedSong() },
