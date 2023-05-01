@@ -64,9 +64,8 @@ fun LyricsScreen(
         LazyColumn(
             modifier = Modifier
                 .fillMaxWidth()
-                .fillMaxHeight(0.80f)
+                .fillMaxHeight(0.85f)
                 .padding(8.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
         ) {
             if (currentLyrics != null) {
                 items(currentLyrics.lyrics.lines) { line ->
