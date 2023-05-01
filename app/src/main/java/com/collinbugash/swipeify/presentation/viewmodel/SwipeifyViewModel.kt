@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.collinbugash.swipeify.data.SwipeifyRepo
+import com.collinbugash.swipeify.data.db.LyricTrack
 import com.collinbugash.swipeify.data.db.Lyrics
 import com.collinbugash.swipeify.data.db.Track
 import kotlinx.coroutines.flow.Flow
@@ -35,8 +36,8 @@ class SwipeifyViewModel(private val swipeifyRepo: SwipeifyRepo) : ViewModel() {
         get() = mLikedSongs.asStateFlow()
 
     //Variable to hold current lyrics
-    private val mCurrentLyrics: MutableStateFlow<Lyrics?> = MutableStateFlow(null)
-    val currentLyrics: StateFlow<Lyrics?>
+    private val mCurrentLyrics: MutableStateFlow<LyricTrack?> = MutableStateFlow(null)
+    val currentLyrics: StateFlow<LyricTrack?>
         get() = mCurrentLyrics.asStateFlow()
 
     // playlist id's that hold songs for each genre, also holds setting if they're enabled / disabled
@@ -103,9 +104,9 @@ class SwipeifyViewModel(private val swipeifyRepo: SwipeifyRepo) : ViewModel() {
 
     fun getLyrics() {
         Log.d(LOG_TAG, "getting the current song's lyrics")
-        val givenLyrics: Lyrics? = mCurrentSong.value?.let { swipeifyRepo.getLyrics(it.id) }
+        val givenLyrics: LyricTrack? = mCurrentSong.value?.let { swipeifyRepo.getLyrics(it.id) }
         mCurrentLyrics.value = givenLyrics
-        Log.d(LOG_TAG, "lyrics: ${givenLyrics?.lines}")
+        Log.d(LOG_TAG, "lyrics: ${givenLyrics?.lyricTrack?.lyrics}")
     }
 
 //    suspend fun getLikedSongs() {

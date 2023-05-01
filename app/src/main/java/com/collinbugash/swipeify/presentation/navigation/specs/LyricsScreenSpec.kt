@@ -23,7 +23,7 @@ object LyricsScreenSpec : IScreenSpec{
         LyricsScreen(
             backButtonPressed = { navController.navigate("home") },
             swipeifyViewModel = swipeifyViewModel,
-            currentLyrics = currentLyrics.value
+            currentLyrics = currentLyrics.value?.lyricTrack?.lyrics
         )
     }
 }

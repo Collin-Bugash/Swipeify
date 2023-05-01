@@ -57,6 +57,8 @@ fun LyricsScreen(
             color = MaterialTheme.colorScheme.tertiary
 
         )
+
+        Text(text = "Language: ${currentLyrics?.language}")
         //Populating lyrics
         LazyColumn(
             modifier = Modifier

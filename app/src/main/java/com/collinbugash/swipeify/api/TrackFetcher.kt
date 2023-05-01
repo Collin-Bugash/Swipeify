@@ -2,6 +2,7 @@ package com.collinbugash.swipeify.api
 
 import android.util.Log
 import com.collinbugash.swipeify.data.SwipeifyRepo
+import com.collinbugash.swipeify.data.db.LyricTrack
 import com.collinbugash.swipeify.data.db.Lyrics
 import com.collinbugash.swipeify.data.db.PlaylistTracks
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -19,8 +20,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class TrackFetcher {
     private val swipeifyService: SwipeifyService
-    private val mTrackLyricsState = MutableStateFlow<Lyrics?>(null)
-    val trackLyricsState: StateFlow<Lyrics?>
+    private val mTrackLyricsState = MutableStateFlow<LyricTrack?>(null)
+    val trackLyricsState: StateFlow<LyricTrack?>
         get() = mTrackLyricsState.asStateFlow()
 
     private val mPlaylistTracksState = MutableStateFlow<PlaylistTracks?>(null)
@@ -53,16 +54,19 @@ class TrackFetcher {
     fun getTrackLyrics(trackId: String) {
         Log.d("API", "Track ID: $trackId")
         val swipeifyRequest = swipeifyService.getTrackLyrics(trackId)
-        swipeifyRequest.enqueue(object : Callback<Lyrics> {
-            override fun onFailure(call: Call<Lyrics>, t: Throwable) {
+        swipeifyRequest.enqueue(object : Callback<LyricTrack> {
+            override fun onFailure(call: Call<LyricTrack>, t: Throwable) {
                 mTrackLyricsState.update { null }
                 Log.d("API", "ERROR WITH FETCHING TRACK LYRICS: ${t.message}")
             }
-            override fun onResponse(call: Call<Lyrics>,
-                                    response: Response<Lyrics>
-            ) {
+            override fun onResponse(call: Call<LyricTrack>, response: Response<LyricTrack>) {
                 val swipeifyResponse = response.body()
-                mTrackLyricsState.update { swipeifyResponse }
+                if (swipeifyResponse == null) {
+                    Log.d("API", "Response to get lyrics is null!")
+                    mTrackLyricsState.update { null }
+                } else {
+                    mTrackLyricsState.update { swipeifyResponse }
+                }
                 Log.d("API", "Response (TrackLyrics): $swipeifyResponse")
             }
         })

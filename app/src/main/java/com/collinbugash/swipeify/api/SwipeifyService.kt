@@ -1,5 +1,6 @@
 package com.collinbugash.swipeify.api
 
+import com.collinbugash.swipeify.data.db.LyricTrack
 import com.collinbugash.swipeify.data.db.Lyrics
 import com.collinbugash.swipeify.data.db.PlaylistTracks
 import retrofit2.Call
@@ -12,7 +13,7 @@ interface SwipeifyService {
     @GET("playlist_tracks/")
     fun getPlaylistTracks(@Query("id") playlistId: String): Call<PlaylistTracks>
     @GET("track_lyrics/")
-    fun getTrackLyrics(@Query("id") trackId: String): Call<Lyrics>
+    fun getTrackLyrics(@Query("id") trackId: String): Call<LyricTrack>
 }
 
 
