@@ -48,9 +48,7 @@ class MainActivity : ComponentActivity() {
         // Check if app is opened for the first time
         val sharedPreferences = getSharedPreferences(PREFS_NAME, 0)
 
-        val editor = sharedPreferences.edit()
-        editor.putBoolean(IS_FIRST_TIME_LAUNCH, true)
-        editor.apply()
+
 
         val isFirstTimeLaunch = sharedPreferences.getBoolean(IS_FIRST_TIME_LAUNCH, true)
         if (isFirstTimeLaunch) {
@@ -60,7 +58,9 @@ class MainActivity : ComponentActivity() {
             coroutineScope.launch {
                 mSwipeifyViewModel.addPlaylists()
             }
-
+            val editor = sharedPreferences.edit()
+            editor.putBoolean(IS_FIRST_TIME_LAUNCH, false)
+            editor.apply()
             // Set the flag to false so this code won't run again
 
         }

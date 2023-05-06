@@ -189,5 +189,7 @@ class SwipeifyViewModel(private val swipeifyRepo: SwipeifyRepo) : ViewModel() {
                 mLikedSongs.update { favoritedList }
             }
         }
+        Log.d(LOG_TAG, "${mLikedSongs.value.size}")
+
     }
 }
