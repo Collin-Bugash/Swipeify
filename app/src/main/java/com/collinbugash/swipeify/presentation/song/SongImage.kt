@@ -36,7 +36,7 @@ fun SongImage(onLyricButtonClicked:() -> Unit, currentSong: Track?){
     val imageUrl = currentSong?.album?.images?.get(0)?.url
 
     Box(modifier = Modifier
-        .padding(padding)
+        .padding(padding, bottom = 0.dp)
         .width(screenWidth - padding - padding)
         .height(screenWidth - padding - padding),
         contentAlignment = Alignment.BottomStart){
@@ -46,21 +46,22 @@ fun SongImage(onLyricButtonClicked:() -> Unit, currentSong: Track?){
             model = imageUrl
         )
 
-        IconButton(modifier = Modifier.padding(12.dp), onClick = { onLyricButtonClicked() }) {
-            Icon(
-                imageVector = Icons.Filled.KeyboardArrowUp,
-                contentDescription = "Lyrics",
-                modifier = Modifier
-                    .size(150.dp)
-                    .border(
-                        BorderStroke(borderWidth, Color.White),
-                        CircleShape
-                    )
-                    .padding(borderWidth)
-                    .clip(CircleShape)
 
-            )
-        }
+    }
+    IconButton(modifier = Modifier.padding(0.dp), onClick = { onLyricButtonClicked() }) {
+        Icon(
+            imageVector = Icons.Filled.KeyboardArrowUp,
+            contentDescription = "Lyrics",
+            modifier = Modifier
+                .size(150.dp)
+                .border(
+                    BorderStroke(borderWidth, Color.White),
+                    CircleShape
+                )
+                .padding(borderWidth)
+                .clip(CircleShape)
+
+        )
     }
 
 }

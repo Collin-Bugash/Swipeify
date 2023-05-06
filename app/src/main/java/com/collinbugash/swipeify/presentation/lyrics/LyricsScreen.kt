@@ -34,7 +34,8 @@ fun LyricsScreen(
         Row(modifier = Modifier
             .fillMaxWidth()
             .padding(12.dp), horizontalArrangement = Arrangement.SpaceBetween){
-            Text(text = "Song Name")
+            if(swipeifyViewModel.currentSong.value != null)
+            Text(text = "${swipeifyViewModel.currentSong.value?.name} Lyrics")
 
             IconButton(
                 onClick = { backButtonPressed() },
@@ -58,8 +59,9 @@ fun LyricsScreen(
             .height(4.dp),
             color = MaterialTheme.colorScheme.tertiary
         )
-
-        Text(text = "Language: ${currentLyrics?.lyrics?.language}")
+        if(currentLyrics != null){
+            Text(text = "Language: ${currentLyrics?.lyrics?.language}")
+        }
         //Populating lyrics
         LazyColumn(
             modifier = Modifier
