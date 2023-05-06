@@ -123,7 +123,7 @@ fun HomeScreen(
                         ,
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        item { SongImage(onLyricButtonClicked = { onLyricButtonClicked()/*TODO FILL IN THIS METHOD LATER TO SHOW LYRICS*/}, currentSong)
+                        item { SongImage(onLyricButtonClicked = { onLyricButtonClicked() }, currentSong)
 
                         }
 

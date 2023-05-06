@@ -35,7 +35,7 @@ fun LyricsScreen(
             .fillMaxWidth()
             .padding(12.dp), horizontalArrangement = Arrangement.SpaceBetween){
             if(swipeifyViewModel.currentSong.value != null)
-            Text(text = "${swipeifyViewModel.currentSong.value?.name} Lyrics")
+                Text(text = "${swipeifyViewModel.currentSong.value?.name} Lyrics")
 
             IconButton(
                 onClick = { backButtonPressed() },
