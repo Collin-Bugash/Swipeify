@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.collinbugash.swipeify.data.SwipeifyRepo
+import com.collinbugash.swipeify.data.db.Genre
 import com.collinbugash.swipeify.data.db.LyricTrack
 import com.collinbugash.swipeify.data.db.Lyrics
 import com.collinbugash.swipeify.data.db.Track
@@ -114,8 +115,13 @@ class SwipeifyViewModel(private val swipeifyRepo: SwipeifyRepo) : ViewModel() {
         val currentGenres = mGenresSelected.value.toMutableList()
         if (mGenresSelected.value.contains(genre)) {
             currentGenres.remove(genre)
+            val g = Genre(genre)
+            swipeifyRepo.deleteGenre(g)
         } else {
             currentGenres.add(genre)
+            val g = Genre(genre)
+            swipeifyRepo.addGenre(g)
+
         }
         mGenresSelected.value = currentGenres
     }
@@ -194,6 +200,17 @@ class SwipeifyViewModel(private val swipeifyRepo: SwipeifyRepo) : ViewModel() {
         viewModelScope.launch {
             swipeifyRepo.getFavoritedSongs().collect { favoritedList ->
                 mLikedSongs.update { favoritedList }
+            }
+        }
+
+        viewModelScope.launch {
+            swipeifyRepo.getGenres().collect { favoritedList ->
+                val l = mutableListOf<String>()
+
+                for(g in favoritedList){
+                    l.add(g.name)
+                }
+                mGenresSelected.update { l.toList() }
             }
         }
         Log.d(LOG_TAG, "${mLikedSongs.value.size}")

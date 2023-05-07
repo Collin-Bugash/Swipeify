@@ -30,7 +30,7 @@ class TrackFetcher {
 
     private val authInterceptor = Interceptor { chain ->
         val request = chain.request().newBuilder()
-            .addHeader("X-RapidAPI-Key", "7e087c7938mshba3de4f37a23827p188399jsnd1f8b5cff558")
+            .addHeader("X-RapidAPI-Key", "a8feb133f0mshbf44f45aa53e766p15a02ejsn3c917a18b7eb")
             .addHeader("X-RapidAPI-Host", "spotify23.p.rapidapi.com")
             .build()
         chain.proceed(request)

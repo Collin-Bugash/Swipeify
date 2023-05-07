@@ -2,6 +2,7 @@ package com.collinbugash.swipeify.data.database
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import com.collinbugash.swipeify.data.db.Genre
 import com.collinbugash.swipeify.data.db.Track
 import kotlinx.coroutines.flow.Flow
 
@@ -23,4 +24,11 @@ interface SwipeifyDao {
     @Update
     suspend fun updateTrackFavorite(track: Track)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun addGenre(genre: Genre)
+    @Delete
+    suspend fun deleteGenre(genre: Genre)
+
+    @Query("SELECT * FROM genre")
+    fun getGenres(): Flow<List<Genre>>
 }

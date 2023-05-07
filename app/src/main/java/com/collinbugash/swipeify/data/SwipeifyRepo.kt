@@ -5,6 +5,7 @@ import android.util.Log
 import com.collinbugash.swipeify.api.TrackFetcher
 import com.collinbugash.swipeify.data.database.SwipeifyDao
 import com.collinbugash.swipeify.data.database.SwipeifyDatabase
+import com.collinbugash.swipeify.data.db.Genre
 import com.collinbugash.swipeify.data.db.LyricTrack
 import com.collinbugash.swipeify.data.db.Lyrics
 import com.collinbugash.swipeify.data.db.Track
@@ -86,6 +87,21 @@ private constructor(private val swipeifyDao: SwipeifyDao, private val coroutineS
 //    }
 
     fun getFavoritedSongs(): Flow<List<Track>> = swipeifyDao.getFavoritedSongs()
+
+    fun getGenres(): Flow<List<Genre>> = swipeifyDao.getGenres()
+
+    fun addGenre(genre: Genre) {
+        coroutineScope.launch {
+            swipeifyDao.addGenre(genre)
+        }
+    }
+    fun deleteGenre(genre: Genre?) {
+        if(genre != null) {
+            coroutineScope.launch {
+                swipeifyDao.deleteGenre(genre)
+            }
+        }
+    }
 
     init {
         Log.d(LOG_TAG, "initializing repo list")
