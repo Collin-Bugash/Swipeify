@@ -40,6 +40,7 @@ class SwipeifyViewModel(private val swipeifyRepo: SwipeifyRepo) : ViewModel() {
     // playlist id's that hold songs for each genre, also holds setting if they're enabled / disabled
     private val mGenres = listOf("piano", "pop", "rock", "R&B", "indie", "country", "jazz", "rap", "EDM")
 //    private val mGenres = listOf("Piano", "Pop")
+//    private val mGenres = listOf("jazz", "rap", "EDM")
 
     private val mPlaylists = listOf(
         Pair("37i9dQZF1DX4sWSpwq3LiO?si=956da7b0331a4ef7", "Piano"),
@@ -47,10 +48,10 @@ class SwipeifyViewModel(private val swipeifyRepo: SwipeifyRepo) : ViewModel() {
         Pair("6JpQsEf9FrpDAmhKNWIV3B?si=a1897b6322c44d1d", "rock"),
         Pair("0HFgdtKVI08nyD0rQtLltH?si=fdc03d8aae674f30", "R&B"),
         Pair("37i9dQZF1EQqkOPvHGajmW?si=dc47d936ec5646c5", "indie"),
-        Pair("37i9dQZF1EQmPV0vrce2QZ?si=77add11b92c642ea", "country"),
-        Pair("37i9dQZF1EQqA6klNdJvwx?si=b0ce17ea984f4138", "jazz"),
-        Pair("37i9dQZF1EIgbjUtLiWmHt?si=a0c611613fbb46de", "rap"),
-        Pair("1lS6v9h4MXOw6f6y8MkS8w?si=b6bf2968d9124b0e", "EDM")
+        Pair("37i9dQZF1EQmPV0vrce2QZ?si=0382227e8dec4c68", "country"),
+        Pair("37i9dQZF1EQqA6klNdJvwx?si=4cac776a341e43e8&nd=1", "jazz"),
+        Pair("37i9dQZF1EIgbjUtLiWmHt?si=2fd2cdd4db634866&nd=1", "rap"),
+        Pair("1lS6v9h4MXOw6f6y8MkS8w?si=eb3b19811134463b&nd=1", "EDM")
     )
     val playlists: List<Pair<String, String>>
         get() = mPlaylists

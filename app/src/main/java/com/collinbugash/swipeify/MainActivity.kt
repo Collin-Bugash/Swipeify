@@ -53,9 +53,10 @@ class MainActivity : ComponentActivity() {
             Log.d(LOG_TAG, "first time launching")
             // Populate the database
             val coroutineScope: CoroutineScope = GlobalScope
-            coroutineScope.launch {
-                mSwipeifyViewModel.addPlaylists()
-            }
+//            coroutineScope.launch {
+//
+//            }
+            mSwipeifyViewModel.addPlaylists()
 
             // Set the flag to false so this code won't run again
 

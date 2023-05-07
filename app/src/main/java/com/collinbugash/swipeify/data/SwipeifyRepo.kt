@@ -62,6 +62,7 @@ private constructor(private val swipeifyDao: SwipeifyDao, private val coroutineS
     fun addPlaylists(playlists: List<Pair<String, String>>) {
         val trackFetcher = TrackFetcher()
         for (playlist in playlists) {
+            Log.d(LOG_TAG, "adding playlist: ${playlist.first}, ${playlist.second}")
             trackFetcher.getPlaylistTracks(playlist.first, playlist.second, this)
         }
     }
