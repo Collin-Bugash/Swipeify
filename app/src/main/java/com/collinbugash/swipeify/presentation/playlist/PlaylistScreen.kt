@@ -9,11 +9,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.lazy.items
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Alignment
 import com.collinbugash.swipeify.data.db.Track
 
 @Composable
-fun PlaylistScreen(songList : List<Track>){
+fun PlaylistScreen(songList : List<Track>, removeSong:(Track)->Unit){
     Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally) {
         Text(text = "Liked Songs")
 
@@ -23,7 +24,8 @@ fun PlaylistScreen(songList : List<Track>){
                 .padding(8.dp)
         ) {
             items(songList) { song ->
-                SongLiked(song)
+
+                SongLiked(song, removeSong = {track -> removeSong(track)})
             }
         }
     }

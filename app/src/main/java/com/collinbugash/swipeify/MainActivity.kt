@@ -49,7 +49,6 @@ class MainActivity : ComponentActivity() {
         val sharedPreferences = getSharedPreferences(PREFS_NAME, 0)
 
 
-
         val isFirstTimeLaunch = sharedPreferences.getBoolean(IS_FIRST_TIME_LAUNCH, true)
         if (isFirstTimeLaunch) {
             Log.d(LOG_TAG, "first time launching")
@@ -58,11 +57,12 @@ class MainActivity : ComponentActivity() {
             coroutineScope.launch {
                 mSwipeifyViewModel.addPlaylists()
             }
+
+            // Set the flag to false so this code won't run again
+
             val editor = sharedPreferences.edit()
             editor.putBoolean(IS_FIRST_TIME_LAUNCH, false)
             editor.apply()
-            // Set the flag to false so this code won't run again
-
         }
 
         setContent {

@@ -23,6 +23,6 @@ object PlaylistScreenSpec : IScreenSpec {
                          coroutineScope: CoroutineScope
     ){
         val likedSongs = swipeifyViewModel.likedSongs.collectAsState()
-        PlaylistScreen(songList = likedSongs.value)
+        PlaylistScreen(songList = likedSongs.value, removeSong = {track -> swipeifyViewModel.deleteSong(track)})
     }
 }

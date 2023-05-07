@@ -152,6 +152,13 @@ class SwipeifyViewModel(private val swipeifyRepo: SwipeifyRepo) : ViewModel() {
         getNextTrack()
     }
 
+    fun deleteSong(track : Track){
+        swipeifyRepo.deleteTrack(track)
+        val likedSongs = mLikedSongs.value.toMutableList()
+        likedSongs.remove(track)
+        mLikedSongs.value = likedSongs
+    }
+
     fun likedSong() {
         mediaPlayer.reset()
         playedNewSong.value = true
