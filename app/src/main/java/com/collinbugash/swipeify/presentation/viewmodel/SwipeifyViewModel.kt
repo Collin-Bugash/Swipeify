@@ -105,7 +105,7 @@ class SwipeifyViewModel(private val swipeifyRepo: SwipeifyRepo) : ViewModel() {
         viewModelScope.launch {
             swipeifyRepo.addPlaylists(mPlaylists, {getNextTrack()})
         }
-//        getNextTrack()
+        getNextTrack()
     }
 
     fun getLyrics() {

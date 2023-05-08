@@ -66,16 +66,6 @@ private constructor(private val swipeifyDao: SwipeifyDao, private val coroutineS
         }
         getNextTrack()
     }
-//    fun addPlaylists(playlists: List<Pair<String, String>>) {
-//        val trackFetcher = TrackFetcher()
-//        val scope = CoroutineScope(Dispatchers.Default)
-//        for (playlist in playlists) {
-//            scope.launch {
-//                trackFetcher.getPlaylistTracks(playlist.first, playlist.second, this@SwipeifyRepo)
-//            }
-//            delay(1000) // Delay 1 second between each API call
-//        }
-//    }
 
     // Gets the lyrivs given an id
     fun getLyrics(trackId: String) {
