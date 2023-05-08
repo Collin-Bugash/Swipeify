@@ -30,7 +30,7 @@ class TrackFetcher {
 
     private val authInterceptor = Interceptor { chain ->
         val request = chain.request().newBuilder()
-            .addHeader("X-RapidAPI-Key", "a8feb133f0mshbf44f45aa53e766p15a02ejsn3c917a18b7eb")
+            .addHeader("X-RapidAPI-Key", "c5f98489a9msha6ff62bb5b058d6p17605djsn09ec57985b9f")
             .addHeader("X-RapidAPI-Host", "spotify23.p.rapidapi.com")
             .build()
         chain.proceed(request)
@@ -39,6 +39,9 @@ class TrackFetcher {
     init {
         val okHttpClient = OkHttpClient.Builder()
             .addInterceptor(authInterceptor)
+            .addInterceptor(HttpLoggingInterceptor().apply {
+                level = HttpLoggingInterceptor.Level.BODY
+            })
             .build()
 
         val retrofit = Retrofit.Builder()
@@ -84,6 +87,7 @@ class TrackFetcher {
             override fun onResponse(call: Call<PlaylistTracks>, response: Response<PlaylistTracks>) {
                 val swipeifyResponse = response.body()
                 Log.d("448.API PLAYLIST ID", playlistId)
+                Log.d("448.API", "Response (PlaylistTracks): $swipeifyResponse")
                 swipeifyResponse?.let { playlistTracks ->
                     mPlaylistTracksState.update { playlistTracks }
                         for (item in playlistTracks.tracks.items) {
@@ -93,7 +97,7 @@ class TrackFetcher {
                             }
 //                            Log.d("API: CURRENT TRACK", item.track.preview_url)
                         }
-                        Log.d("448.API", "FINISHED ADDING")
+                        Log.d("448.API FINISH", "FINISHED ADDING")
                 }
             }
         })

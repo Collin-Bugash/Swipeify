@@ -14,6 +14,9 @@ import com.collinbugash.swipeify.data.db.Genre
 import com.collinbugash.swipeify.data.db.LyricTrack
 import com.collinbugash.swipeify.data.db.Lyrics
 import com.collinbugash.swipeify.data.db.Track
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -40,7 +43,8 @@ class SwipeifyViewModel(private val swipeifyRepo: SwipeifyRepo) : ViewModel() {
     // playlist id's that hold songs for each genre, also holds setting if they're enabled / disabled
     private val mGenres = listOf("piano", "pop", "rock", "R&B", "indie", "country", "jazz", "rap", "EDM")
 //    private val mGenres = listOf("Piano", "Pop")
-//    private val mGenres = listOf("jazz", "rap", "EDM")
+//    private val mGenres = listOf("Jazz", "Rap", "EDM")
+//private val mGenres = listOf("Indie")
 
     private val mPlaylists = listOf(
         Pair("37i9dQZF1DX4sWSpwq3LiO?si=956da7b0331a4ef7", "Piano"),
@@ -49,9 +53,9 @@ class SwipeifyViewModel(private val swipeifyRepo: SwipeifyRepo) : ViewModel() {
         Pair("0HFgdtKVI08nyD0rQtLltH?si=fdc03d8aae674f30", "R&B"),
         Pair("37i9dQZF1EQqkOPvHGajmW?si=dc47d936ec5646c5", "Indie"),
         Pair("37i9dQZF1EQmPV0vrce2QZ?si=0382227e8dec4c68", "Country"),
-        Pair("37i9dQZF1EQqA6klNdJvwx?si=4cac776a341e43e8&nd=1", "Jazz"),
-        Pair("37i9dQZF1EIgbjUtLiWmHt?si=2fd2cdd4db634866&nd=1", "Rap"),
-        Pair("1lS6v9h4MXOw6f6y8MkS8w?si=eb3b19811134463b&nd=1", "EDM")
+        Pair("37i9dQZF1EQqA6klNdJvwx?si=b0ce17ea984f4138", "Jazz"),
+        Pair("37i9dQZF1EIgbjUtLiWmHt?si=a0c611613fbb46de", "Rap"),
+        Pair("1lS6v9h4MXOw6f6y8MkS8w?si=b6bf2968d9124b0e", "EDM")
     )
     val playlists: List<Pair<String, String>>
         get() = mPlaylists
@@ -97,7 +101,11 @@ class SwipeifyViewModel(private val swipeifyRepo: SwipeifyRepo) : ViewModel() {
     }
     fun addPlaylists(){
         Log.d(LOG_TAG, "adding songs to db")
-        swipeifyRepo.addPlaylists(mPlaylists)
+//        val coroutineScope = CoroutineScope(viewModelScope.coroutineContext)
+        viewModelScope.launch {
+            swipeifyRepo.addPlaylists(mPlaylists, {getNextTrack()})
+        }
+//        getNextTrack()
     }
 
     fun getLyrics() {

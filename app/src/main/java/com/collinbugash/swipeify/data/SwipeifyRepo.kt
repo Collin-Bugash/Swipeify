@@ -9,12 +9,8 @@ import com.collinbugash.swipeify.data.db.Genre
 import com.collinbugash.swipeify.data.db.LyricTrack
 import com.collinbugash.swipeify.data.db.Lyrics
 import com.collinbugash.swipeify.data.db.Track
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class SwipeifyRepo
 private constructor(private val swipeifyDao: SwipeifyDao, private val coroutineScope: CoroutineScope = GlobalScope)
@@ -59,13 +55,27 @@ private constructor(private val swipeifyDao: SwipeifyDao, private val coroutineS
     }
 
     // loops over the playlist id's and adds all the songs from them into db
-    fun addPlaylists(playlists: List<Pair<String, String>>) {
+    suspend fun addPlaylists(playlists: List<Pair<String, String>>, getNextTrack: () -> Unit) {
         val trackFetcher = TrackFetcher()
         for (playlist in playlists) {
             Log.d(LOG_TAG, "adding playlist: ${playlist.first}, ${playlist.second}")
-            trackFetcher.getPlaylistTracks(playlist.first, playlist.second, this)
+            delay(400)
+            coroutineScope.launch {
+                trackFetcher.getPlaylistTracks(playlist.first, playlist.second, this@SwipeifyRepo)
+            }
         }
+        getNextTrack()
     }
+//    fun addPlaylists(playlists: List<Pair<String, String>>) {
+//        val trackFetcher = TrackFetcher()
+//        val scope = CoroutineScope(Dispatchers.Default)
+//        for (playlist in playlists) {
+//            scope.launch {
+//                trackFetcher.getPlaylistTracks(playlist.first, playlist.second, this@SwipeifyRepo)
+//            }
+//            delay(1000) // Delay 1 second between each API call
+//        }
+//    }
 
     // Gets the lyrivs given an id
     fun getLyrics(trackId: String) {

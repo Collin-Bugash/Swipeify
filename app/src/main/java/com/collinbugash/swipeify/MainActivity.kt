@@ -21,10 +21,8 @@ import com.collinbugash.swipeify.presentation.navigation.SwipeifyNavHost
 import com.collinbugash.swipeify.presentation.viewmodel.SwipeifyViewModel
 import com.collinbugash.swipeify.presentation.viewmodel.SwipeifyViewModelFactory
 import com.collinbugash.swipeify.ui.theme.SwipeifyTheme
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.launch
 
 
 class MainActivity : ComponentActivity() {
@@ -53,10 +51,9 @@ class MainActivity : ComponentActivity() {
             Log.d(LOG_TAG, "first time launching")
             // Populate the database
             val coroutineScope: CoroutineScope = GlobalScope
-//            coroutineScope.launch {
-//
-//            }
-            mSwipeifyViewModel.addPlaylists()
+            coroutineScope.launch {
+                mSwipeifyViewModel.addPlaylists()
+            }
 
             // Set the flag to false so this code won't run again
 
